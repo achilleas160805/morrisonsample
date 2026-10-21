@@ -161,39 +161,41 @@
         </div>
     </header>
 
-    <!-- HERO SECTION WITH SLIDESHOW -->
-    <section class="py-20 md:py-32 px-6 md:px-12 hairline-b">
-        <div class="max-w-7xl mx-auto">
+    <!-- HERO SECTION WITH BACKGROUND SLIDESHOW -->
+    <section class="relative py-24 md:py-40 px-6 md:px-12 hairline-b overflow-hidden flex items-center min-h-[60vh] md:min-h-[75vh]">
+        
+        <!-- Background Slideshow (Absolute Positioned) -->
+        <div class="absolute inset-0 z-0">
+            <img src="morrison1.jpg" alt="Morrison Rooftop View" class="slide-img absolute inset-0 w-full h-full object-cover opacity-100" data-slide="0">
+            <img src="morrison2.jpg" alt="Morrison Interior Lounge" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="1">
+            <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
+            <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
             
+            <!-- Gradient Overlay για να διαβάζονται άνετα τα γράμματα από πάνω -->
+            <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/90 to-beige/40"></div>
+        </div>
+
+        <!-- Foreground Content (Relative Positioned) -->
+        <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="max-w-4xl">
                 <span class="text-[11px] uppercase tracking-[0.25em] text-ink-muted block mb-4">
                     Τευχος Τοποθεσιας — 17ης Νοεμβριου 87, Πυλαια
                 </span>
                 
-                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8 drop-shadow-sm">
                     Η αστικη θεα απο ψηλα. <br>
                     Καφες, brunch και dining <br>
                     σε καθαρες γραμμες.
                 </h1>
             </div>
+        </div>
 
-            <!-- SLIDESHOW CONTAINER -->
-            <div class="mt-8 md:mt-12 relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden hairline-all bg-beige-muted">
-                <!-- Slides -->
-                <img src="morrison1.jpg" alt="Morrison Rooftop View" class="slide-img absolute inset-0 w-full h-full object-cover opacity-100" data-slide="0">
-                <img src="morrison2.jpg" alt="Morrison Interior Lounge" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="1">
-                <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
-                <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
-                
-                <!-- Navigation Dots -->
-                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-10">
-                    <button onclick="setSlide(0)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-100 transition-opacity duration-300"></button>
-                    <button onclick="setSlide(1)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
-                    <button onclick="setSlide(2)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
-                    <button onclick="setSlide(3)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
-                </div>
-            </div>
-
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-20">
+            <button onclick="setSlide(0)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-100 transition-opacity duration-300"></button>
+            <button onclick="setSlide(1)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
+            <button onclick="setSlide(2)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
+            <button onclick="setSlide(3)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
         </div>
     </section>
 
@@ -480,11 +482,11 @@
             // Handle dot opacity
             dots.forEach((dot, i) => {
                 if (i === index) {
-                    dot.classList.remove('opacity-50');
+                    dot.classList.remove('opacity-40');
                     dot.classList.add('opacity-100');
                 } else {
                     dot.classList.remove('opacity-100');
-                    dot.classList.add('opacity-50');
+                    dot.classList.add('opacity-40');
                 }
             });
 
