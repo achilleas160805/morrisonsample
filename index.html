@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="el" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morrison • The Premium Rooftop | 17ης Νοεμβρίου 87, Πυλαία</title>
+    
+    <!-- Google Fonts: Didact Gothic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for fluid layout utility -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: {
+                            DEFAULT: '#F7F5F0',
+                            tint: '#FCFBF9',
+                            muted: '#EFECE6',
+                            border: '#DDD8CE',
+                            dark: '#D2CCC0'
+                        },
+                        ink: {
+                            DEFAULT: '#1E1C1A',
+                            soft: '#4A4641',
+                            muted: '#7A756D',
+                            faint: '#A6A095'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Didact Gothic"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Strict Typographic Override */
+        *, *::before, *::after, input, button, select, textarea {
+            font-family: 'Didact Gothic', sans-serif !important;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #F7F5F0;
+            color: #1E1C1A;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background-color: #1E1C1A;
+            color: #F7F5F0;
+        }
+
+        /* Subtle hair-thin borders like printed paper */
+        .hairline-b {
+            border-bottom: 1px solid #DDD8CE;
+        }
+        .hairline-t {
+            border-top: 1px solid #DDD8CE;
+        }
+        .hairline-r {
+            border-right: 1px solid #DDD8CE;
+        }
+        .hairline-all {
+            border: 1px solid #DDD8CE;
+        }
+
+        /* Clean understated editorial focus styles */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1E1C1A;
+        }
+
+        /* Custom understated scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F5F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DDD8CE;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7A756D;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige">
+
+    <!-- TOP ANNOUNCEMENT / METRIC TICKER (EDITORIAL MONOGRAPH STYLE) -->
+    <aside class="w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-muted">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
+                <span>Ανοιχτα σημερα εως 02:00 π.μ.</span>
+                <span class="text-ink-faint">/</span>
+                <span>17ης Νοεμβριου 87, Πυλαια</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span>Google Score: <strong class="text-ink font-normal">4,4 / 5.0 (3.851 αξιολογησεις)</strong></span>
+                <span class="text-ink-faint">/</span>
+                <span>5–30 € / ατομο</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- HEADER & MINIMAL NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-beige/95 backdrop-blur-none hairline-b py-5 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logotype -->
+            <a href="#" class="group">
+                <div class="text-lg md:text-xl uppercase tracking-[0.25em] text-ink font-normal">
+                    MORRISON
+                </div>
+                <div class="text-[9px] uppercase tracking-[0.3em] text-ink-muted mt-0.5">
+                    The Premium Rooftop — Pylaia
+                </div>
+            </a>
+
+            <!-- Editorial Nav -->
+            <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.18em] text-ink-soft">
+                <a href="#about" class="hover:text-ink hover:underline underline-offset-8 transition-colors">Χωρος</a>
+                <a href="#menu" class="hover:text-ink hover:underline underline-offset-8 transition-colors">Καταλογος</a>
+                <a href="#reviews" class="hover:text-ink hover:underline underline-offset-8 transition-colors">Αξιολογησεις</a>
+                <a href="#contact" class="hover:text-ink hover:underline underline-offset-8 transition-colors">Προσβαση</a>
+            </nav>
+
+            <!-- Action -->
+            <div class="flex items-center gap-4">
+                <a href="tel:2316020535" class="hidden sm:inline-block text-xs uppercase tracking-widest text-ink-muted hover:text-ink">
+                    231 602 0535
+                </a>
+                
+                <button onclick="openReservationModal()" class="px-5 py-2.5 text-xs uppercase tracking-[0.16em] bg-ink text-beige hover:bg-ink-soft transition-colors font-normal">
+                    Κρατηση Τραπεζιου
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileNav()" class="md:hidden text-xs uppercase tracking-widest text-ink px-2 py-1 hairline-all">
+                    Menu
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-nav" class="hidden md:hidden pt-4 pb-2 mt-4 hairline-t space-y-3 text-left">
+            <a href="#about" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-1">Ο Χωρος & η Θεα</a>
+            <a href="#menu" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-1">Καταλογος Εδεσματων</a>
+            <a href="#reviews" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-1">3.851+ Κριτικες</a>
+            <a href="#contact" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-1">Τοποθεσια & Parking</a>
+            <div class="pt-2 hairline-t text-xs uppercase tracking-widest text-ink">
+                Τηλ. 231 602 0535
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION: PURE EDITORIAL TYPOGRAPHY (ZERO IMAGES) -->
+    <section class="py-20 md:py-32 px-6 md:px-12 hairline-b">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="max-w-4xl">
+                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-muted block mb-4">
+                    Τευχος Τοποθεσιας — 17ης Νοεμβριου 87, Πυλαια
+                </span>
+                
+                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8">
+                    Η αστικη θεα απο ψηλα. <br>
+                    Καφες, brunch και dining <br>
+                    σε καθαρες γραμμες.
+                </h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 hairline-t items-start">
+                <div class="md:col-span-7">
+                    <p class="text-sm md:text-base text-ink-soft leading-relaxed max-w-2xl">
+                        Το Morrison είναι ένα ανοιχτό roof garden στην ανατολική πλευρά της Θεσσαλονίκης. Εδώ η εμπειρία ορίζεται από το φως, τον καθαρό αέρα, τις εκλεκτές κοπές κρέατος και έναν προσεγμένο κατάλογο από το πρωί με Freddo Single Origin μέχρι αργά τη νύχτα με cocktails και επιδόρπια.
+                    </p>
+                </div>
+
+                <div class="md:col-span-5 flex flex-col sm:flex-row gap-3 md:justify-end">
+                    <button onclick="openReservationModal()" class="px-6 py-3 bg-ink text-beige text-xs uppercase tracking-[0.16em] text-center hover:bg-ink-soft transition-colors">
+                        Online Κρατηση
+                    </button>
+                    <a href="#menu" class="px-6 py-3 hairline-all text-ink text-xs uppercase tracking-[0.16em] text-center hover:bg-beige-muted transition-colors">
+                        Αναγνωση Μενού
+                    </a>
+                </div>
+            </div>
+
+            <!-- KEY TABULAR FACTS (PAPER MONOGRAPH STYLE) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 mt-12 hairline-t text-xs">
+                <div class="space-y-1">
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">01. Τοποθεσια</span>
+                    <span class="text-ink uppercase block">17ης Νοεμβριου 87</span>
+                    <span class="text-ink-faint block">Πυλαία 555 35 (JX5X+7F)</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">02. Ωραριο</span>
+                    <span class="text-ink uppercase block">10:00 — 02:00 π.μ.</span>
+                    <span class="text-ink-faint block">Καθημερινά όλο τον χρόνο</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">03. Σταθμευση</span>
+                    <span class="text-ink uppercase block">Ευκολο Parking</span>
+                    <span class="text-ink-faint block">Άνετος χώρος χωρίς άγχος</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">04. Εμπειρια</span>
+                    <span class="text-ink uppercase block">Φαγητο & Πακετο</span>
+                    <span class="text-ink-faint block">Χωρίς διανομή (No Delivery)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: THE VENUE & PERSPECTIVE -->
+    <section id="about" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                
+                <div class="md:col-span-4">
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Σημειωμα Χωρου</span>
+                    <h2 class="text-2xl md:text-3xl uppercase tracking-wider text-ink font-normal leading-snug">
+                        Ηρεμια, οριζοντας <br>και συνεπεια.
+                    </h2>
+                </div>
+
+                <div class="md:col-span-8 space-y-8 text-sm text-ink-soft leading-relaxed">
+                    <p>
+                        Μακριά από τη φασαρία του κέντρου αλλά με άμεση πρόσβαση από τον Περιφερειακό, το rooftop του Morrison διαμορφώθηκε για να προσφέρει έναν ευρύχωρο και τακτοποιημένο προορισμό. Ο χώρος παραμένει φωτεινός τις πρωινές ώρες για καφέ και brunch, ενώ καθώς δύει ο ήλιος μετατρέπεται σε ένα ατμοσφαιρικό σημείο συνάντησης για φαγητό και ποτό.
+                    </p>
+
+                    <!-- Textual Structural Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 hairline-t text-xs">
+                        <div class="p-4 bg-beige hairline-all space-y-2">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Τομεας Α</span>
+                            <h3 class="text-ink uppercase font-normal text-sm">Skyline Deck</h3>
+                            <p class="text-ink-muted text-[11px] leading-relaxed">
+                                Τραπέζια στην περιφέρεια του ορόφου με ανεμπόδιστη θέα στο ηλιοβασίλεμα και την πόλη.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-beige hairline-all space-y-2">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Τομεας Β</span>
+                            <h3 class="text-ink uppercase font-normal text-sm">Dining Room</h3>
+                            <p class="text-ink-muted text-[11px] leading-relaxed">
+                                Επιμελημένα τραπέζια φαγητού αφιερωμένα στις premium κοπές, τις pinsas και τα φρέσκα ζυμαρικά.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-beige hairline-all space-y-2">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Τομεας Γ</span>
+                            <h3 class="text-ink uppercase font-normal text-sm">Central Bar</h3>
+                            <p class="text-ink-muted text-[11px] leading-relaxed">
+                                Σημείο αναφοράς για barrel-aged Negronis, aperitivo και επιλεγμένη λίστα κρασιών.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: THE MENU (PURE ARCHITECTURAL TABLE / MONOGRAPH) -->
+    <section id="menu" class="py-20 px-6 md:px-12 hairline-b">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Καταλογος Εδεσματων & Ποτων</span>
+                    <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">
+                        Επιλογες του Morrison
+                    </h2>
+                </div>
+                <div class="text-xs uppercase tracking-widest text-ink-muted">
+                    Ευρος τιμων: 5,00 — 30,00 € / ατομο
+                </div>
+            </div>
+
+            <!-- Tab Switcher (Understated Paper-Tab Style) -->
+            <div class="flex flex-wrap gap-2 md:gap-3 mb-10 text-xs uppercase tracking-wider hairline-b pb-4">
+                <button onclick="setMenuCategory('all', this)" class="menu-tab px-4 py-2 bg-ink text-beige transition-colors">
+                    Ολα τα είδη
+                </button>
+                <button onclick="setMenuCategory('brunch', this)" class="menu-tab px-4 py-2 hairline-all text-ink hover:bg-beige-muted transition-colors">
+                    Brunch & Καφες
+                </button>
+                <button onclick="setMenuCategory('mains', this)" class="menu-tab px-4 py-2 hairline-all text-ink hover:bg-beige-muted transition-colors">
+                    Κυριως & Κοπες
+                </button>
+                <button onclick="setMenuCategory('dolci', this)" class="menu-tab px-4 py-2 hairline-all text-ink hover:bg-beige-muted transition-colors">
+                    Επιδορπια & Bar
+                </button>
+            </div>
+
+            <!-- Editorial Menu List (Tabular, clean, high contrast readability) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-8" id="menu-items-list">
+                
+                <!-- Item 1 -->
+                <div class="menu-row hairline-b pb-6" data-category="brunch">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Freddo Espresso</h4>
+                        <span class="text-xs tracking-wider text-ink">4,20 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        100% Arabica Single Origin εκχύλιση. Ισορροπημένο σώμα, απαλή οξύτητα και επίγευση κακάο.
+                    </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-row hairline-b pb-6" data-category="brunch">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Αυγα Ποσε</h4>
+                        <span class="text-xs tracking-wider text-ink">9,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Ψωμί brioche, μους φρέσκου αβοκάντο, καπνιστός σολομός, σχοινόπρασο και βελούδινη hollandaise.
+                    </p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-row hairline-b pb-6" data-category="brunch">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Ομελετα Μανιταριων</h4>
+                        <span class="text-xs tracking-wider text-ink">8,80 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Αυγά ελευθέρας βοσκής, άγρια μανιτάρια, κατσικίσιο τυρί chèvre και λεπτό άρωμα λευκής τρούφας.
+                    </p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-row hairline-b pb-6" data-category="brunch">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Αβγοψωμο Morrison</h4>
+                        <span class="text-xs tracking-wider text-ink">7,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Χωριάτικο προζυμένιο ψωμί, καραμελωμένο βούτυρο, καπνιστή γραβιέρα και αυγό μάτι.
+                    </p>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="menu-row hairline-b pb-6" data-category="mains">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Ταλιατα Μοσχου</h4>
+                        <span class="text-xs tracking-wider text-ink">26,00 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Black Angus κοπή, ανθός αλατιού, φλοίδες παλαιωμένης παρμεζάνας, άγρια ρόκα και λάδι λευκής τρούφας.
+                    </p>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="menu-row hairline-b pb-6" data-category="mains">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Μπριζολα Μοσχαρισια</h4>
+                        <span class="text-xs tracking-wider text-ink">28,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Dry-aged ribeye ωρίμανσης, ψημένο στα κάρβουνα. Συνοδεύεται από πατάτες baby και βούτυρο βοτάνων.
+                    </p>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="menu-row hairline-b pb-6" data-category="mains">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Παπαρδελες με Ραγου</h4>
+                        <span class="text-xs tracking-wider text-ink">16,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Σιγομαγειρεμένο ραγού μόσχου σε κόκκινο κρασί, χειροποίητα ζυμαρικά και αφρός Parmigiano Reggiano.
+                    </p>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="menu-row hairline-b pb-6" data-category="mains">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Pinsa Margarita</h4>
+                        <span class="text-xs tracking-wider text-ink">12,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Ρωμαϊκή ζύμη 72ωρης ωρίμανσης, σάλτσα τομάτας San Marzano, mozzarella fior di latte, φρέσκος βασιλικός.
+                    </p>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="menu-row hairline-b pb-6" data-category="mains">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Mini Burgers Κοτοπουλο</h4>
+                        <span class="text-xs tracking-wider text-ink">11,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Τρία αφράτα ψωμάκια brioche, τραγανό στήθος κοτόπουλο, coleslaw με πράσινο μήλο και χειροποίητη μαγιονέζα.
+                    </p>
+                </div>
+
+                <!-- Item 10 -->
+                <div class="menu-row hairline-b pb-6" data-category="dolci">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Παβλοβα</h4>
+                        <span class="text-xs tracking-wider text-ink">8,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Τραγανή μαρέγκα, βελούδινη κρέμα βανίλιας Μαδαγασκάρης, coulis κόκκινων φρούτων του δάσους.
+                    </p>
+                </div>
+
+                <!-- Item 11 -->
+                <div class="menu-row hairline-b pb-6" data-category="dolci">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Pancake με Πραλινα</h4>
+                        <span class="text-xs tracking-wider text-ink">8,00 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        Στρώσεις pancakes, ρευστή πραλίνα φουντουκιού, τριμμένο μπισκότο βουτύρου και καραμελωμένα pecans.
+                    </p>
+                </div>
+
+                <!-- Item 12 -->
+                <div class="menu-row hairline-b pb-6" data-category="dolci">
+                    <div class="flex items-baseline justify-between mb-1.5">
+                        <h4 class="text-base uppercase tracking-wider text-ink font-normal">Morrison Signature Cocktail</h4>
+                        <span class="text-xs tracking-wider text-ink">12,50 €</span>
+                    </div>
+                    <p class="text-xs text-ink-muted leading-relaxed">
+                        London Dry Gin, elderflower, bergamot liqueur, φρέσκο lime και αφρός σαμπάνιας.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Download or note -->
+            <div class="mt-8 text-xs text-ink-muted flex items-center justify-between">
+                <span>* Οι τιμές περιλαμβάνουν όλες τις νόμιμες επιβαρύνσεις.</span>
+                <span class="hidden sm:inline">Σερβίρεται καθημερινά</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: VERIFIED REVIEWS (3.851 REVIEWS, 4.4 RATING) -->
+    <section id="reviews" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Αυθεντικες Εντυπωσεις Επισκεπτων</span>
+                    <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">
+                        4,4 / 5.0 — 3.851 Αξιολογησεις
+                    </h2>
+                </div>
+                <div class="text-xs uppercase tracking-widest text-ink-muted">
+                    Πηγη: Google Maps Verified Reviews
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review 1: Γιώργος Πλοχωρίδης -->
+                <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-ink mb-4">
+                            [ ★ ★ ★ ★ ★ ] 5.0 / 5.0
+                        </div>
+                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
+                            «Απόλυτο highlight στη Θεσσαλονίκη! Το Morison Bar προσφέρει υπέροχη θέα στο κέντρο, εύκολο πάρκινγκ και έναν χώρο που είναι πάντα πεντακάθαρος, πανέμορφος και πραγματικά προσεγμένος. Το service είναι εξαιρετικό, με προσωπικό που ξέρει τη δουλειά του.»
+                        </p>
+                    </div>
+                    <div class="pt-4 hairline-t text-xs">
+                        <span class="text-ink uppercase block font-normal">Γιωργος Πλοχωριδης</span>
+                        <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 123 κριτικές</span>
+                    </div>
+                </div>
+
+                <!-- Review 2: Andro Konsta -->
+                <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-ink mb-4">
+                            [ ★ ★ ★ ★ ★ ] 5.0 / 5.0
+                        </div>
+                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
+                            «Τα φαγητά ήταν εξαιρετικά και ωραία μαγειρεμένα. Το σέρβις πολύ ευγενικό και η ατμόσφαιρα ωραία... Μία από τις πιο σταθερές επιλογές για καλό φαγητό και θέα στην ανατολική πλευρά της πόλης.»
+                        </p>
+                    </div>
+                    <div class="pt-4 hairline-t text-xs">
+                        <span class="text-ink uppercase block font-normal">Andro Konsta</span>
+                        <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 37 κριτικές</span>
+                    </div>
+                </div>
+
+                <!-- Review 3: Vaso Psomadaki -->
+                <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-ink mb-4">
+                            [ ★ ★ ★ ★ ☆ ] 4.0 / 5.0
+                        </div>
+                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
+                            «Η εξυπηρέτηση από την κοπέλα ήταν άψογη εξού και τα 4 αστέρια! Μεγάλες μερίδες γενικά που είναι πολύ θετικό, η σαλάτα ήταν τοπ και η θέα πραγματικά πολύ ωραία!»
+                        </p>
+                    </div>
+                    <div class="pt-4 hairline-t text-xs">
+                        <span class="text-ink uppercase block font-normal">Vaso Psomadaki</span>
+                        <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 195 κριτικές</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: LOCATION, HOURS & ACCESSIBILITY -->
+    <section id="contact" class="py-20 px-6 md:px-12 hairline-b">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-6 space-y-8">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Προσβαση & Στοιχεια</span>
+                        <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">
+                            17ης Νοεμβριου 87
+                        </h2>
+                        <p class="text-xs uppercase tracking-widest text-ink-muted mt-1">
+                            Πυλαια 555 35, Θεσσαλονικη — JX5X+7F
+                        </p>
+                    </div>
+
+                    <p class="text-xs md:text-sm text-ink-soft leading-relaxed">
+                        Το μαγαζί βρίσκεται στον τελευταίο όροφο του κτηρίου, με άνετο ιδιωτικό και περιμετρικό χώρο στάθμευσης. Η πρόσβαση γίνεται άμεσα από τον κόμβο Πυλαίας / Πανοράματος και την οδό 17ης Νοεμβρίου.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Τηλεφωνικη Επικοινωνια</span>
+                            <div class="flex items-center justify-between">
+                                <a href="tel:2316020535" class="text-ink uppercase text-sm font-normal hover:underline">
+                                    231 602 0535
+                                </a>
+                                <button onclick="copyToClipboard('2316020535', 'Αντιγράφηκε το τηλέφωνο')" class="text-[10px] uppercase tracking-wider text-ink-muted hover:text-ink">
+                                    [Αντιγραφη]
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Ωρες Λειτουργιας</span>
+                            <span class="text-ink uppercase text-sm font-normal block">10:00 — 02:00 π.μ.</span>
+                            <span class="text-[10px] text-ink-muted block">Δευτέρα — Κυριακή</span>
+                        </div>
+
+                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Υπηρεσιες Χωρου</span>
+                            <span class="text-ink uppercase block">Dine-in • Takeaway</span>
+                            <span class="text-[10px] text-ink-muted block">Χωρίς διανομή κατ' οίκον</span>
+                        </div>
+
+                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Σταθμευση Οχηματων</span>
+                            <span class="text-ink uppercase block">Ελευθερο Parking</span>
+                            <span class="text-[10px] text-ink-muted block">Άνετος χώρος για τους πελάτες</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://maps.google.com/?q=Morrison+The+Premium+Rooftop+Pylaia" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-ink text-beige text-xs uppercase tracking-widest hover:bg-ink-soft transition-colors">
+                            Οδηγιες στο Google Maps
+                        </a>
+                        <button onclick="copyToClipboard('17ης Νοεμβρίου 87, Πυλαία 555 35', 'Αντιγράφηκε η διεύθυνση')" class="px-6 py-3 hairline-all text-xs uppercase tracking-widest text-ink hover:bg-beige-muted transition-colors">
+                            Αντιγραφη Διευθυνσης
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map Frame Column (Pure minimal container, no dark filters, light paper tone) -->
+                <div class="lg:col-span-6 hairline-all p-3 bg-beige flex flex-col justify-between">
+                    <div class="w-full h-80 lg:h-full min-h-[300px]">
+                        <iframe 
+                            title="Morrison Rooftop Location Map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3029.7426369062326!2d22.9863266!3d40.5913867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a83e0dcfa72a0f%3A0x6b80145c22ee3a22!2sMorrison%20The%20Premium%20Rooftop!5e0!3m2!1sel!2sgr!4v1710000000000!5m2!1sel!2sgr" 
+                            class="w-full h-full border-0" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="pt-3 flex items-center justify-between text-[11px] uppercase tracking-widest text-ink-muted">
+                        <span>17ης Νοεμβρίου 87, Πυλαία</span>
+                        <span>Τηλ: 231 602 0535</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-beige-muted py-12 px-6 md:px-12 text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
+                <span class="text-[10px] uppercase tracking-widest text-ink-muted block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
+            </div>
+
+            <div class="flex flex-wrap gap-6 uppercase tracking-wider text-[11px] text-ink-muted">
+                <a href="#about" class="hover:text-ink">Χωρος</a>
+                <a href="#menu" class="hover:text-ink">Καταλογος</a>
+                <a href="#reviews" class="hover:text-ink">Αξιολογησεις</a>
+                <a href="#contact" class="hover:text-ink">Προσβαση</a>
+                <a href="tel:2316020535" class="hover:text-ink">231 602 0535</a>
+            </div>
+
+            <div class="text-[10px] uppercase tracking-widest text-ink-muted">
+                © Morrison Rooftop. Όλα τα δικαιώματα διατηρούνται.
+            </div>
+        </div>
+    </footer>
+
+    <!-- RESERVATION MODAL (CLEAN ARCHITECTURAL DRAWER / FORM) -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <!-- Understated backdrop -->
+        <div onclick="closeReservationModal()" class="fixed inset-0 bg-ink/40"></div>
+        
+        <!-- Modal Content Container -->
+        <div class="relative z-10 bg-beige hairline-all max-w-lg w-full p-6 sm:p-8 shadow-lg">
+            <div class="flex items-start justify-between pb-4 hairline-b mb-6">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-ink-muted block">Δελτιο Κρατησης</span>
+                    <h3 class="text-xl uppercase tracking-wider text-ink font-normal mt-1">
+                        Κρατηση στο Morrison
+                    </h3>
+                </div>
+                <button onclick="closeReservationModal()" class="text-xs uppercase tracking-widest text-ink-muted hover:text-ink p-1">
+                    [Κλεισιμο]
+                </button>
+            </div>
+
+            <form onsubmit="handleReservationSubmit(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ονοματεπωνυμο *</label>
+                    <input type="text" required placeholder="π.χ. Αλέξανδρος Παπαδόπουλος" class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Τηλεφωνο *</label>
+                        <input type="tel" required placeholder="π.χ. 6900000000" class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                    </div>
+                    <div>
+                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ημερομηνια *</label>
+                        <input type="date" id="booking-date" required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ωρα Αφιξης *</label>
+                        <select required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                            <option value="10:30">10:30 (Καφές & Brunch)</option>
+                            <option value="12:30">12:30 (Brunch)</option>
+                            <option value="15:00">15:00 (Μεσημεριανό)</option>
+                            <option value="18:30">18:30 (Sunset View)</option>
+                            <option value="20:30" selected>20:30 (Δείπνο)</option>
+                            <option value="22:30">22:30 (Cocktails & Bar)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Αριθμος Ατομων *</label>
+                        <select required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                            <option value="1">1 άτομο</option>
+                            <option value="2" selected>2 άτομα</option>
+                            <option value="3">3 άτομα</option>
+                            <option value="4">4 άτομα</option>
+                            <option value="5">5 άτομα</option>
+                            <option value="6+">6+ άτομα</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Προτιμηση Ζωνης</label>
+                    <select class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
+                        <option value="terrace">Skyline Deck (Εξωτερικός χώρος με θέα)</option>
+                        <option value="dining">Dining Deck (Τραπέζι φαγητού)</option>
+                        <option value="bar">Central Bar (Υψηλό κάθισμα / Ποτό)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Σημειωσεις / Ειδικες Προτιμησεις</label>
+                    <textarea rows="2" placeholder="π.χ. Τραπέζι κοντά στο τζάμι, επέτειος κτλ." class="w-full bg-beige-tint hairline-all px-3 py-2 text-xs text-ink"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 bg-ink text-beige text-xs uppercase tracking-[0.16em] hover:bg-ink-soft transition-colors">
+                        Υποβολη Αιτηματος Κρατησης
+                    </button>
+                    <p class="text-[10px] text-center text-ink-muted mt-2">
+                        Η ομάδα του Morrison θα σας καλέσει άμεσα για επιβεβαίωση.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CLEAN FEEDBACK BANNER (NO FLASHY TOAST) -->
+    <div id="status-toast" class="fixed bottom-6 right-6 z-50 hidden bg-beige hairline-all p-4 shadow-md max-w-sm text-xs">
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <span class="text-ink font-normal uppercase block mb-0.5" id="toast-title">Ενημερωση</span>
+                <span class="text-ink-muted text-[11px] block" id="toast-desc">Το αίτημα καταχωρήθηκε.</span>
+            </div>
+            <button onclick="hideToast()" class="text-ink-muted hover:text-ink text-[10px] uppercase">[OK]</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: CLEAN VANILLA LOGIC -->
+    <script>
+        // Set date minimum to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('booking-date');
+            if (dateInput) {
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+        });
+
+        // Mobile Nav Toggle
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            if (nav) {
+                nav.classList.toggle('hidden');
+            }
+        }
+
+        // Menu Tab Switcher
+        function setMenuCategory(cat, btn) {
+            const rows = document.querySelectorAll('.menu-row');
+            const tabs = document.querySelectorAll('.menu-tab');
+
+            tabs.forEach(t => {
+                t.classList.remove('bg-ink', 'text-beige');
+                t.classList.add('hairline-all', 'text-ink');
+            });
+
+            if (btn) {
+                btn.classList.add('bg-ink', 'text-beige');
+                btn.classList.remove('hairline-all', 'text-ink');
+            }
+
+            rows.forEach(r => {
+                if (cat === 'all' || r.getAttribute('data-category') === cat) {
+                    r.style.display = 'block';
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+        }
+
+        // Reservation Modal Controls
+        const modal = document.getElementById('reservation-modal');
+        function openReservationModal() {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReservationModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            closeReservationModal();
+            showNotice('Κρατηση', 'Το αίτημά σας καταχωρήθηκε. Θα επικοινωνήσουμε τηλεφωνικά για την επιβεβαίωση.');
+        }
+
+        // Copy to clipboard utility
+        function copyToClipboard(text, message) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotice('Αντιγραφηκε', message);
+                }).catch(() => {
+                    fallbackCopy(text, message);
+                });
+            } else {
+                fallbackCopy(text, message);
+            }
+        }
+
+        function fallbackCopy(text, message) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            try {
+                document.execCommand('copy');
+                showNotice('Αντιγραφηκε', message);
+            } catch (err) {
+                showNotice('Πληροφορια', text);
+            }
+            document.body.removeChild(temp);
+        }
+
+        // Minimal notice dialog
+        function showNotice(title, desc) {
+            const toast = document.getElementById('status-toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-desc').textContent = desc;
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        function hideToast() {
+            document.getElementById('status-toast').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
