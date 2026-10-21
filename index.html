@@ -97,25 +97,25 @@
             transition: opacity 1.2s ease-in-out;
         }
 
-        /* Animation για τα γράμματα της αρχικής */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Typewriter Cursor Animation */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: white;
+            margin-left: 4px;
+            vertical-align: bottom;
+            animation: blink 0.8s step-end infinite;
         }
 
-        .animate-hero-text {
-            opacity: 0;
-            animation: fadeInUp 1.2s ease-out forwards;
-        }
-
-        .animation-delay-200 {
-            animation-delay: 0.2s;
+        /* Elegant Vignette for Images */
+        .vignette-overlay {
+            background: radial-gradient(circle at center, rgba(30,28,26,0.2) 0%, rgba(30,28,26,0.8) 100%);
         }
     </style>
 </head>
@@ -186,28 +186,29 @@
         
         <!-- Background Slideshow (Absolute Positioned) -->
         <div class="absolute inset-0 z-0">
-            <img src="morrison1.jpg" alt="Morrison Rooftop View" class="slide-img absolute inset-0 w-full h-full object-cover opacity-100" data-slide="0">
-            <img src="morrison2.jpg" alt="Morrison Interior Lounge" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="1">
-            <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
-            <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
+            <img src="morrison1.jpg" alt="Morrison Rooftop View" class="slide-img absolute inset-0 w-full h-full object-cover object-center opacity-100" data-slide="0">
+            <img src="morrison2.jpg" alt="Morrison Interior Lounge" class="slide-img absolute inset-0 w-full h-full object-cover object-center opacity-0" data-slide="1">
+            <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover object-center opacity-0" data-slide="2">
+            <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover object-center opacity-0" data-slide="3">
             
-            <!-- Σκούρο gradient για να φαίνονται τα λευκά γράμματα -->
-            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
-            <!-- Ελαφρύ backdrop blur για να «μαλακώσει» η εικόνα -->
-            <div class="absolute inset-0 backdrop-blur-[2px]"></div>
+            <!-- Elegant dark vignette overlay (focuses on the center, darkens edges) -->
+            <div class="absolute inset-0 vignette-overlay"></div>
+            <!-- Slight extra dark overlay for text readability -->
+            <div class="absolute inset-0 bg-black/20"></div>
+            <!-- Soft blur to make text pop -->
+            <div class="absolute inset-0 backdrop-blur-[1px]"></div>
         </div>
 
         <!-- Foreground Content (Relative Positioned) -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="max-w-2xl">
-                <span class="animate-hero-text text-[11px] uppercase tracking-[0.25em] text-white/90 block mb-4 drop-shadow-sm">
+                <span class="text-[11px] uppercase tracking-[0.25em] text-white/90 block mb-4 drop-shadow-sm opacity-0 animate-[fadeIn_1s_ease-in_forwards_0.5s]">
                     Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία
                 </span>
                 
-                <h1 class="animate-hero-text animation-delay-200 text-3xl sm:text-4xl md:text-5xl text-white font-normal leading-[1.3] mb-8 drop-shadow-md">
-                    Η αστική θέα από ψηλά. <br>
-                    Καφές, brunch και dining <br>
-                    σε καθαρές γραμμές.
+                <!-- Typewriter Heading -->
+                <h1 class="text-3xl sm:text-4xl md:text-5xl text-white font-normal leading-[1.3] mb-8 drop-shadow-lg min-h-[140px] md:min-h-[200px]">
+                    <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor"></span>
                 </h1>
             </div>
         </div>
@@ -483,52 +484,76 @@
             document.getElementById('status-toast').classList.add('hidden');
         }
 
-        // --- SLIDESHOW LOGIC ---
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('[data-slide]');
-        const dots = document.querySelectorAll('.slide-dot');
-        let slideInterval;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.remove('opacity-0');
-                    slide.classList.add('opacity-100');
-                } else {
-                    slide.classList.remove('opacity-100');
-                    slide.classList.add('opacity-0');
-                }
-            });
-
-            dots.forEach((dot, i) => {
-                if (i === index) {
-                    dot.classList.remove('opacity-40');
-                    dot.classList.add('opacity-100');
-                } else {
-                    dot.classList.remove('opacity-100');
-                    dot.classList.add('opacity-40');
-                }
-            });
-
-            currentSlideIndex = index;
-        }
-
-        function nextSlide() {
-            let nextIndex = (currentSlideIndex + 1) % slides.length;
-            showSlide(nextIndex);
-        }
-
-        function setSlide(index) {
-            clearInterval(slideInterval);
-            showSlide(index);
-            startSlideShow();
-        }
-
-        function startSlideShow() {
-            slideInterval = setInterval(nextSlide, 4000);
-        }
-
+        // --- TYPEWRITER ANIMATION ---
         document.addEventListener('DOMContentLoaded', () => {
+            const heading = document.getElementById('typewriter-text');
+            const cursor = document.getElementById('typewriter-cursor');
+            const text = "Η αστική θέα από ψηλά.\nΚαφές, brunch και dining\nσε καθαρές γραμμές.";
+            
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        heading.innerHTML += '<br>';
+                    } else {
+                        heading.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(type, 40); // Ταχύτητα πληκτρολόγησης (40ms)
+                } else {
+                    cursor.style.display = 'none'; // Κρύβει τον κέρσορα στο τέλος
+                }
+            }
+            
+            // Ξεκινάει μετά από μισό δευτερόλεπτο
+            setTimeout(type, 500);
+
+            // --- SLIDESHOW LOGIC ---
+            let currentSlideIndex = 0;
+            const slides = document.querySelectorAll('[data-slide]');
+            const dots = document.querySelectorAll('.slide-dot');
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.remove('opacity-0');
+                        slide.classList.add('opacity-100');
+                    } else {
+                        slide.classList.remove('opacity-100');
+                        slide.classList.add('opacity-0');
+                    }
+                });
+
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('opacity-40');
+                        dot.classList.add('opacity-100');
+                    } else {
+                        dot.classList.remove('opacity-100');
+                        dot.classList.add('opacity-40');
+                    }
+                });
+
+                currentSlideIndex = index;
+            }
+
+            function nextSlide() {
+                let nextIndex = (currentSlideIndex + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+
+            window.setSlide = function(index) {
+                clearInterval(slideInterval);
+                showSlide(index);
+                startSlideShow();
+            }
+
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, 4000);
+            }
+
             if (slides.length > 0) {
                 startSlideShow();
             }
