@@ -92,6 +92,11 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #7A756D;
         }
+
+        /* Smooth Slideshow */
+        .slide-img {
+            transition: opacity 1.2s ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige">
@@ -156,7 +161,7 @@
         </div>
     </header>
 
-    <!-- HERO SECTION: PURE EDITORIAL TYPOGRAPHY (ZERO IMAGES) -->
+    <!-- HERO SECTION WITH SLIDESHOW -->
     <section class="py-20 md:py-32 px-6 md:px-12 hairline-b">
         <div class="max-w-7xl mx-auto">
             
@@ -170,6 +175,23 @@
                     Καφες, brunch και dining <br>
                     σε καθαρες γραμμες.
                 </h1>
+            </div>
+
+            <!-- SLIDESHOW CONTAINER -->
+            <div class="mt-8 md:mt-12 relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden hairline-all bg-beige-muted">
+                <!-- Slides -->
+                <img src="morrison1.jpg" alt="Morrison Rooftop View" class="slide-img absolute inset-0 w-full h-full object-cover opacity-100" data-slide="0">
+                <img src="morrison2.jpg" alt="Morrison Interior Lounge" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="1">
+                <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
+                <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
+                
+                <!-- Navigation Dots -->
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-10">
+                    <button onclick="setSlide(0)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-100 transition-opacity duration-300"></button>
+                    <button onclick="setSlide(1)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
+                    <button onclick="setSlide(2)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
+                    <button onclick="setSlide(3)" class="slide-dot w-2.5 h-2.5 rounded-full bg-beige opacity-50 hover:opacity-100 transition-opacity duration-300"></button>
+                </div>
             </div>
 
         </div>
@@ -292,7 +314,7 @@
     <section id="contact" class="py-20 px-6 md:px-12 hairline-b">
         <div class="max-w-7xl mx-auto">
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
                 <!-- Info Column -->
                 <div class="lg:col-span-6 space-y-8">
@@ -325,13 +347,13 @@
                     </div>
                 </div>
 
-                <!-- Map Frame Column (Pure minimal container, no dark filters, light paper tone) -->
-                <div class="lg:col-span-6 hairline-all p-3 bg-beige flex flex-col justify-between">
-                    <div class="w-full h-80 lg:h-full min-h-[300px]">
+                <!-- Map Frame Column -->
+                <div class="lg:col-span-6 hairline-all p-3 bg-beige flex flex-col">
+                    <div class="relative w-full flex-1 min-h-[320px] lg:min-h-[380px]">
                         <iframe 
                             title="Morrison Rooftop Location Map"
                             src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&z=16&output=embed"
-                            class="w-full h-full border-0" 
+                            class="absolute inset-0 w-full h-full border-0" 
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
@@ -436,6 +458,60 @@
         function hideToast() {
             document.getElementById('status-toast').classList.add('hidden');
         }
+
+        // --- SLIDESHOW LOGIC ---
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('[data-slide]');
+        const dots = document.querySelectorAll('.slide-dot');
+        let slideInterval;
+
+        function showSlide(index) {
+            // Handle slide opacity
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                }
+            });
+
+            // Handle dot opacity
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('opacity-50');
+                    dot.classList.add('opacity-100');
+                } else {
+                    dot.classList.remove('opacity-100');
+                    dot.classList.add('opacity-50');
+                }
+            });
+
+            currentSlideIndex = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function setSlide(index) {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startSlideShow();
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 4000); // Αλλαγή εικόνας κάθε 4 δευτερόλεπτα
+        }
+
+        // Ξεκινάει το slideshow όταν φορτώσει η σελίδα
+        document.addEventListener('DOMContentLoaded', () => {
+            if (slides.length > 0) {
+                startSlideShow();
+            }
+        });
     </script>
 </body>
 </html>
