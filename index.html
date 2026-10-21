@@ -19,16 +19,16 @@
                 extend: {
                     colors: {
                         beige: {
-                            DEFAULT: '#C1AB8D', // Το βασικό χρώμα από το λογότυπο
-                            tint: '#D4C2A8',    // Πιο ανοιχτό για εναλλαγή ενοτήτων
-                            muted: '#A89274',   // Πιο σκούρο για header/footer
-                            border: '#8F7A5E'   // Σκούρο για τις γραμμές (hairlines)
+                            DEFAULT: '#F3EBE1', // Απαλό, ζεστό μπεζ
+                            tint: '#FAF6F1',
+                            muted: '#E8DDD1',
+                            border: '#D5C8B9'
                         },
                         ink: {
-                            DEFAULT: '#1A1815', // Πολύ σκούρο καφέ/μαύρο για αντίθεση
-                            soft: '#3F3931',
-                            muted: '#6A6053',
-                            faint: '#8A7E6E'
+                            DEFAULT: '#1E1C1A',
+                            soft: '#4A4641',
+                            muted: '#7A756D',
+                            faint: '#A6A095'
                         }
                     },
                     fontFamily: {
@@ -47,35 +47,35 @@
         }
 
         body {
-            background-color: #C1AB8D; /* beige.DEFAULT */
-            color: #1A1815; /* ink.DEFAULT */
+            background-color: #F3EBE1;
+            color: #1E1C1A;
             letter-spacing: 0.02em;
             -webkit-font-smoothing: antialiased;
         }
 
         ::selection {
-            background-color: #1A1815; /* ink.DEFAULT */
-            color: #C1AB8D; /* beige.DEFAULT */
+            background-color: #1E1C1A;
+            color: #F3EBE1;
         }
 
         /* Subtle hair-thin borders like printed paper */
         .hairline-b {
-            border-bottom: 1px solid #8F7A5E;
+            border-bottom: 1px solid #D5C8B9;
         }
         .hairline-t {
-            border-top: 1px solid #8F7A5E;
+            border-top: 1px solid #D5C8B9;
         }
         .hairline-r {
-            border-right: 1px solid #8F7A5E;
+            border-right: 1px solid #D5C8B9;
         }
         .hairline-all {
-            border: 1px solid #8F7A5E;
+            border: 1px solid #D5C8B9;
         }
 
         /* Clean understated editorial focus styles */
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #1A1815;
+            border-color: #1E1C1A;
         }
 
         /* Custom understated scrollbar */
@@ -83,13 +83,13 @@
             width: 4px;
         }
         ::-webkit-scrollbar-track {
-            background: #C1AB8D;
+            background: #F3EBE1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #8F7A5E;
+            background: #D5C8B9;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #6A6053;
+            background: #7A756D;
         }
 
         /* Smooth Slideshow */
@@ -100,11 +100,11 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige">
 
-    <!-- TOP ANNOUNCEMENT / METRIC TICKER (EDITORIAL MONOGRAPH STYLE) -->
+    <!-- TOP ANNOUNCEMENT / METRIC TICKER -->
     <aside class="w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-soft">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <div class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-800"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
                 <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
             </div>
         </div>
@@ -170,18 +170,20 @@
             <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
             <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
             
-            <!-- Gradient Overlay για να διαβάζονται άνετα τα γράμματα από πάνω -->
-            <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/95 to-beige/30"></div>
+            <!-- Απαλό overlay με θόλωμα αντί για βαρύ χρώμα -->
+            <div class="absolute inset-0 bg-gradient-to-r from-beige/80 via-beige/40 to-transparent"></div>
+            <!-- Ελαφρύ backdrop blur για να «μαλακώσει» η εικόνα χωρίς να χαθεί -->
+            <div class="absolute inset-0 backdrop-blur-[2px]"></div>
         </div>
 
         <!-- Foreground Content (Relative Positioned) -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="max-w-4xl">
-                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-soft block mb-4">
+                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-soft block mb-4 drop-shadow-sm">
                     Τευχος Τοποθεσιας — 17ης Νοεμβριου 87, Πυλαια
                 </span>
                 
-                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8 drop-shadow-sm">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8 drop-shadow-md">
                     Η αστικη θεα απο ψηλα. <br>
                     Καφες, brunch και dining <br>
                     σε καθαρες γραμμες.
@@ -258,7 +260,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
-                <!-- Review 1: Γιώργος Πλοχωρίδης -->
+                <!-- Review 1 -->
                 <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
                     <div>
                         <div class="text-xs uppercase tracking-widest text-ink mb-4">
@@ -274,7 +276,7 @@
                     </div>
                 </div>
 
-                <!-- Review 2: Andro Konsta -->
+                <!-- Review 2 -->
                 <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
                     <div>
                         <div class="text-xs uppercase tracking-widest text-ink mb-4">
@@ -290,7 +292,7 @@
                     </div>
                 </div>
 
-                <!-- Review 3: Vaso Psomadaki -->
+                <!-- Review 3 -->
                 <div class="p-6 bg-beige hairline-all flex flex-col justify-between">
                     <div>
                         <div class="text-xs uppercase tracking-widest text-ink mb-4">
@@ -396,7 +398,7 @@
         </div>
     </footer>
 
-    <!-- CLEAN FEEDBACK BANNER (NO FLASHY TOAST) -->
+    <!-- CLEAN FEEDBACK BANNER -->
     <div id="status-toast" class="fixed bottom-6 right-6 z-50 hidden bg-beige hairline-all p-4 shadow-md max-w-sm text-xs">
         <div class="flex items-start justify-between gap-4">
             <div>
@@ -407,7 +409,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT: CLEAN VANILLA LOGIC -->
+    <!-- JAVASCRIPT -->
     <script>
         // Mobile Nav Toggle
         function toggleMobileNav() {
@@ -467,7 +469,6 @@
         let slideInterval;
 
         function showSlide(index) {
-            // Handle slide opacity
             slides.forEach((slide, i) => {
                 if (i === index) {
                     slide.classList.remove('opacity-0');
@@ -478,7 +479,6 @@
                 }
             });
 
-            // Handle dot opacity
             dots.forEach((dot, i) => {
                 if (i === index) {
                     dot.classList.remove('opacity-40');
@@ -504,10 +504,9 @@
         }
 
         function startSlideShow() {
-            slideInterval = setInterval(nextSlide, 4000); // Αλλαγή εικόνας κάθε 4 δευτερόλεπτα
+            slideInterval = setInterval(nextSlide, 4000);
         }
 
-        // Ξεκινάει το slideshow όταν φορτώσει η σελίδα
         document.addEventListener('DOMContentLoaded', () => {
             if (slides.length > 0) {
                 startSlideShow();
