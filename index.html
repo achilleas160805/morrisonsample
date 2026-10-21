@@ -19,17 +19,16 @@
                 extend: {
                     colors: {
                         beige: {
-                            DEFAULT: '#F7F5F0',
-                            tint: '#FCFBF9',
-                            muted: '#EFECE6',
-                            border: '#DDD8CE',
-                            dark: '#D2CCC0'
+                            DEFAULT: '#C1AB8D', // Το βασικό χρώμα από το λογότυπο
+                            tint: '#D4C2A8',    // Πιο ανοιχτό για εναλλαγή ενοτήτων
+                            muted: '#A89274',   // Πιο σκούρο για header/footer
+                            border: '#8F7A5E'   // Σκούρο για τις γραμμές (hairlines)
                         },
                         ink: {
-                            DEFAULT: '#1E1C1A',
-                            soft: '#4A4641',
-                            muted: '#7A756D',
-                            faint: '#A6A095'
+                            DEFAULT: '#1A1815', // Πολύ σκούρο καφέ/μαύρο για αντίθεση
+                            soft: '#3F3931',
+                            muted: '#6A6053',
+                            faint: '#8A7E6E'
                         }
                     },
                     fontFamily: {
@@ -48,35 +47,35 @@
         }
 
         body {
-            background-color: #F7F5F0;
-            color: #1E1C1A;
+            background-color: #C1AB8D; /* beige.DEFAULT */
+            color: #1A1815; /* ink.DEFAULT */
             letter-spacing: 0.02em;
             -webkit-font-smoothing: antialiased;
         }
 
         ::selection {
-            background-color: #1E1C1A;
-            color: #F7F5F0;
+            background-color: #1A1815; /* ink.DEFAULT */
+            color: #C1AB8D; /* beige.DEFAULT */
         }
 
         /* Subtle hair-thin borders like printed paper */
         .hairline-b {
-            border-bottom: 1px solid #DDD8CE;
+            border-bottom: 1px solid #8F7A5E;
         }
         .hairline-t {
-            border-top: 1px solid #DDD8CE;
+            border-top: 1px solid #8F7A5E;
         }
         .hairline-r {
-            border-right: 1px solid #DDD8CE;
+            border-right: 1px solid #8F7A5E;
         }
         .hairline-all {
-            border: 1px solid #DDD8CE;
+            border: 1px solid #8F7A5E;
         }
 
         /* Clean understated editorial focus styles */
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #1E1C1A;
+            border-color: #1A1815;
         }
 
         /* Custom understated scrollbar */
@@ -84,13 +83,13 @@
             width: 4px;
         }
         ::-webkit-scrollbar-track {
-            background: #F7F5F0;
+            background: #C1AB8D;
         }
         ::-webkit-scrollbar-thumb {
-            background: #DDD8CE;
+            background: #8F7A5E;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #7A756D;
+            background: #6A6053;
         }
 
         /* Smooth Slideshow */
@@ -102,10 +101,10 @@
 <body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige">
 
     <!-- TOP ANNOUNCEMENT / METRIC TICKER (EDITORIAL MONOGRAPH STYLE) -->
-    <aside class="w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-muted">
+    <aside class="w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-soft">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <div class="flex items-center gap-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-800"></span>
                 <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
             </div>
         </div>
@@ -138,7 +137,7 @@
 
             <!-- Action -->
             <div class="flex items-center gap-4">
-                <a href="tel:2316020535" class="hidden sm:inline-block text-xs uppercase tracking-widest text-ink-muted hover:text-ink">
+                <a href="tel:2316020535" class="hidden sm:inline-block text-xs uppercase tracking-widest text-ink-muted hover:text-ink transition-colors">
                     231 602 0535
                 </a>
 
@@ -172,13 +171,13 @@
             <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
             
             <!-- Gradient Overlay για να διαβάζονται άνετα τα γράμματα από πάνω -->
-            <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/90 to-beige/40"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/95 to-beige/30"></div>
         </div>
 
         <!-- Foreground Content (Relative Positioned) -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="max-w-4xl">
-                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-muted block mb-4">
+                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-soft block mb-4">
                     Τευχος Τοποθεσιας — 17ης Νοεμβριου 87, Πυλαια
                 </span>
                 
@@ -379,19 +378,19 @@
                 <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-8 w-auto object-contain">
                 <div>
                     <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
-                    <span class="text-[10px] uppercase tracking-widest text-ink-muted block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
+                    <span class="text-[10px] uppercase tracking-widest text-ink-soft block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-6 uppercase tracking-wider text-[11px] text-ink-muted">
-                <a href="#about" class="hover:text-ink">Χωρος</a>
-                <a href="#menu" class="hover:text-ink">Καταλογος</a>
-                <a href="#reviews" class="hover:text-ink">Αξιολογησεις</a>
-                <a href="#contact" class="hover:text-ink">Προσβαση</a>
-                <a href="tel:2316020535" class="hover:text-ink">231 602 0535</a>
+            <div class="flex flex-wrap gap-6 uppercase tracking-wider text-[11px] text-ink-soft">
+                <a href="#about" class="hover:text-ink transition-colors">Χωρος</a>
+                <a href="#menu" class="hover:text-ink transition-colors">Καταλογος</a>
+                <a href="#reviews" class="hover:text-ink transition-colors">Αξιολογησεις</a>
+                <a href="#contact" class="hover:text-ink transition-colors">Προσβαση</a>
+                <a href="tel:2316020535" class="hover:text-ink transition-colors">231 602 0535</a>
             </div>
 
-            <div class="text-[10px] uppercase tracking-widest text-ink-muted">
+            <div class="text-[10px] uppercase tracking-widest text-ink-soft">
                 © Morrison Rooftop. Όλα τα δικαιώματα διατηρούνται.
             </div>
         </div>
@@ -402,7 +401,7 @@
         <div class="flex items-start justify-between gap-4">
             <div>
                 <span class="text-ink font-normal uppercase block mb-0.5" id="toast-title">Ενημερωση</span>
-                <span class="text-ink-muted text-[11px] block" id="toast-desc">Το αίτημα καταχωρήθηκε.</span>
+                <span class="text-ink-soft text-[11px] block" id="toast-desc">Το αίτημα καταχωρήθηκε.</span>
             </div>
             <button onclick="hideToast()" class="text-ink-muted hover:text-ink text-[10px] uppercase">[OK]</button>
         </div>
