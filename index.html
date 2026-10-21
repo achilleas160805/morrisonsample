@@ -183,19 +183,25 @@
             transform-origin: left;
         }
 
-        /* --- CINEMATIC SLIDESHOW (Ken Burns) --- */
+        /* --- CINEMATIC SLIDESHOW (Fixed Smooth Transition) --- */
         .slide-img {
-            transition: opacity 1.5s ease-in-out;
+            opacity: 0;
+            transform: scale(1);
+            /* Smooth fade + Ken Burns zoom */
+            transition: opacity 1.5s ease-in-out, transform 10s linear;
             will-change: opacity, transform;
         }
         
         .slide-img.active-slide {
-            animation: kenBurns 8s ease-out forwards;
+            opacity: 1;
+            transform: scale(1.08);
         }
-
-        @keyframes kenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
+        
+        .slide-img.inactive-slide {
+            opacity: 0;
+            transform: scale(1);
+            /* Όταν η εικόνα εξαφανίζεται, το zoom επανέρχεται ακαριαία (0s) ενώ είναι αόρατη */
+            transition: opacity 1.5s ease-in-out, transform 0s;
         }
 
         /* --- SCROLL REVEAL & BLUR --- */
@@ -251,8 +257,8 @@
         }
         .typewriter-cursor {
             display: inline-block;
-            width: 3px;
-            height: 1.1em;
+            width: 2px;
+            height: 1em;
             background-color: white;
             margin-left: 6px;
             vertical-align: bottom;
@@ -337,28 +343,29 @@
         </div>
     </header>
 
-    <!-- HERO SECTION (Anchor Bottom-Left Layout) -->
+    <!-- HERO SECTION -->
     <section class="relative min-h-[85vh] w-full overflow-hidden flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-12 hairline-b">
         
         <!-- Background Slideshow -->
         <div class="absolute inset-0 z-0" id="hero-bg-container">
-            <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[70%_center] opacity-100 active-slide" data-slide="0">
-            <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_65%] opacity-0" data-slide="1">
-            <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_70%] opacity-0" data-slide="2">
-            <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_60%] opacity-0" data-slide="3">
+            <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[70%_center] active-slide" data-slide="0">
+            <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_65%] inactive-slide" data-slide="1">
+            <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_70%] inactive-slide" data-slide="2">
+            <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_60%] inactive-slide" data-slide="3">
             
-            <!-- Cinematic Bottom Gradient (Dark at bottom, clear at top) -->
+            <!-- Cinematic Bottom Gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
         </div>
 
         <!-- Foreground Content -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="max-w-4xl">
-                <span class="text-[11px] uppercase tracking-[0.25em] text-white/80 block mb-4 drop-shadow-sm opacity-0 animate-[fadeIn_1s_ease-in_forwards_0.5s]">
+            <div class="max-w-3xl">
+                <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/80 block mb-3 drop-shadow-sm opacity-0 animate-[fadeIn_1s_ease-in_forwards_0.5s]">
                     Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία
                 </span>
                 
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-normal leading-[1.2] mb-0 drop-shadow-2xl min-h-[120px] md:min-h-[180px]">
+                <!-- Hero Text: Πιο μικρό, 2 σειρές, με απαλή θόλωση (blur) -->
+                <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 font-normal leading-[1.35] mb-0 drop-shadow-2xl min-h-[80px] md:min-h-[100px] filter blur-[0.4px]">
                     <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor"></span>
                 </h1>
             </div>
@@ -649,7 +656,6 @@
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             
             // Move glare
-            const glare = card.querySelector('::before');
             card.style.setProperty('--glare-x', `${x}px`);
             card.style.setProperty('--glare-y', `${y}px`);
         }
@@ -661,23 +667,23 @@
         // INITIALIZATION
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Typewriter
+            // Typewriter (2 Γραμμές)
             const heading = document.getElementById('typewriter-text');
             const cursor = document.getElementById('typewriter-cursor');
-            const text = "Η αστική θέα από ψηλά.\nΚαφές, brunch και dining\nσε καθαρές γραμμές.";
+            const text = "Η αστική θέα από ψηλά.\nΚαφές, brunch & dining.";
             let i = 0;
             function type() {
                 if (i < text.length) {
                     heading.innerHTML = text.substring(0, i + 1).replace(/\n/g, '<br>');
                     i++;
-                    setTimeout(type, 50);
+                    setTimeout(type, 60); // Λίγο πιο αργό για premium αίσθηση
                 } else {
                     cursor.style.display = 'none';
                 }
             }
-            setTimeout(type, 400);
+            setTimeout(type, 600);
 
-            // Slideshow
+            // Slideshow (Fixed Snapping via CSS Classes)
             let currentSlideIndex = 0;
             const slides = document.querySelectorAll('[data-slide]');
             const dots = document.querySelectorAll('.slide-dot');
@@ -686,11 +692,11 @@
             function showSlide(index) {
                 slides.forEach((slide, i) => {
                     if (i === index) {
-                        slide.classList.remove('opacity-0');
-                        slide.classList.add('opacity-100', 'active-slide');
+                        slide.classList.remove('inactive-slide');
+                        slide.classList.add('active-slide');
                     } else {
-                        slide.classList.remove('opacity-100', 'active-slide');
-                        slide.classList.add('opacity-0');
+                        slide.classList.remove('active-slide');
+                        slide.classList.add('inactive-slide');
                     }
                 });
                 dots.forEach((dot, i) => {
@@ -703,10 +709,10 @@
             window.setSlide = (index) => {
                 clearInterval(slideInterval);
                 showSlide(index);
-                slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 5000);
+                slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 6000);
             }
 
-            slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 5000);
+            slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 6000);
 
             // Scroll Reveal
             const revealOnScroll = new IntersectionObserver((entries, observer) => {
