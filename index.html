@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morrison • The Premium Rooftop | 17ης Νοεμβρίου 87, Πυλαία</title>
-    
+    <link rel="icon" href="morrisonlogo.jpg" type="image/jpeg">
+
     <!-- Google Fonts: Didact Gothic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,9 +101,7 @@
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <div class="flex items-center gap-3">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
-                <span>Ανοιχτα σημερα εως 02:00 π.μ.</span>
-                <span class="text-ink-faint">/</span>
-                <span>17ης Νοεμβριου 87, Πυλαια</span>
+                <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
             </div>
         </div>
     </aside>
@@ -111,13 +110,16 @@
     <header class="sticky top-0 z-40 bg-beige/95 backdrop-blur-none hairline-b py-5 px-6 md:px-12">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
-            <!-- Logotype -->
-            <a href="#" class="group">
-                <div class="text-lg md:text-xl uppercase tracking-[0.25em] text-ink font-normal">
-                    MORRISON
-                </div>
-                <div class="text-[9px] uppercase tracking-[0.3em] text-ink-muted mt-0.5">
-                    The Premium Rooftop — Pylaia
+            <!-- Logotype with Logo -->
+            <a href="#" class="group flex items-center gap-3">
+                <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-10 w-auto object-contain">
+                <div>
+                    <div class="text-lg md:text-xl uppercase tracking-[0.25em] text-ink font-normal">
+                        MORRISON
+                    </div>
+                    <div class="text-[9px] uppercase tracking-[0.3em] text-ink-muted mt-0.5">
+                        The Premium Rooftop — Pylaia
+                    </div>
                 </div>
             </a>
 
@@ -134,10 +136,6 @@
                 <a href="tel:2316020535" class="hidden sm:inline-block text-xs uppercase tracking-widest text-ink-muted hover:text-ink">
                     231 602 0535
                 </a>
-                
-                <button onclick="openReservationModal()" class="px-5 py-2.5 text-xs uppercase tracking-[0.16em] bg-ink text-beige hover:bg-ink-soft transition-colors font-normal">
-                    Κρατηση Τραπεζιου
-                </button>
 
                 <!-- Mobile Menu Button -->
                 <button onclick="toggleMobileNav()" class="md:hidden text-xs uppercase tracking-widest text-ink px-2 py-1 hairline-all">
@@ -182,9 +180,6 @@
                 </div>
 
                 <div class="md:col-span-5 flex flex-col sm:flex-row gap-3 md:justify-end">
-                    <button onclick="openReservationModal()" class="px-6 py-3 bg-ink text-beige text-xs uppercase tracking-[0.16em] text-center hover:bg-ink-soft transition-colors">
-                        Online Κρατηση
-                    </button>
                     <a href="#menu" class="px-6 py-3 hairline-all text-ink text-xs uppercase tracking-[0.16em] text-center hover:bg-beige-muted transition-colors">
                         Αναγνωση Μενού
                     </a>
@@ -192,24 +187,19 @@
             </div>
 
             <!-- KEY TABULAR FACTS (PAPER MONOGRAPH STYLE) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 mt-12 hairline-t text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 mt-12 hairline-t text-xs">
                 <div class="space-y-1">
                     <span class="text-ink-muted text-[10px] uppercase tracking-widest block">01. Τοποθεσια</span>
                     <span class="text-ink uppercase block">17ης Νοεμβριου 87</span>
                     <span class="text-ink-faint block">Πυλαία 555 35 (JX5X+7F)</span>
                 </div>
                 <div class="space-y-1">
-                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">02. Ωραριο</span>
-                    <span class="text-ink uppercase block">10:00 — 02:00 π.μ.</span>
-                    <span class="text-ink-faint block">Καθημερινά όλο τον χρόνο</span>
-                </div>
-                <div class="space-y-1">
-                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">03. Σταθμευση</span>
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">02. Σταθμευση</span>
                     <span class="text-ink uppercase block">Ευκολο Parking</span>
                     <span class="text-ink-faint block">Άνετος χώρος χωρίς άγχος</span>
                 </div>
                 <div class="space-y-1">
-                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">04. Εμπειρια</span>
+                    <span class="text-ink-muted text-[10px] uppercase tracking-widest block">03. Εμπειρια</span>
                     <span class="text-ink uppercase block">Φαγητο & Πακετο</span>
                     <span class="text-ink-faint block">Χωρίς διανομή (No Delivery)</span>
                 </div>
@@ -367,12 +357,6 @@
                         </div>
 
                         <div class="p-4 hairline-all bg-beige-tint space-y-1">
-                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Ωρες Λειτουργιας</span>
-                            <span class="text-ink uppercase text-sm font-normal block">10:00 — 02:00 π.μ.</span>
-                            <span class="text-[10px] text-ink-muted block">Δευτέρα — Κυριακή</span>
-                        </div>
-
-                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
                             <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Υπηρεσιες Χωρου</span>
                             <span class="text-ink uppercase block">Dine-in • Takeaway</span>
                             <span class="text-[10px] text-ink-muted block">Χωρίς διανομή κατ' οίκον</span>
@@ -382,6 +366,12 @@
                             <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Σταθμευση Οχηματων</span>
                             <span class="text-ink uppercase block">Ελευθερο Parking</span>
                             <span class="text-[10px] text-ink-muted block">Άνετος χώρος για τους πελάτες</span>
+                        </div>
+
+                        <div class="p-4 hairline-all bg-beige-tint space-y-1">
+                            <span class="text-[10px] uppercase tracking-widest text-ink-muted block">Τοποθεσια</span>
+                            <span class="text-ink uppercase block">Πυλαια 555 35</span>
+                            <span class="text-[10px] text-ink-muted block">JX5X+7F, Θεσσαλονικη</span>
                         </div>
                     </div>
 
@@ -421,9 +411,12 @@
     <!-- FOOTER -->
     <footer class="bg-beige-muted py-12 px-6 md:px-12 text-xs">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-                <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
-                <span class="text-[10px] uppercase tracking-widest text-ink-muted block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
+            <div class="flex items-center gap-3">
+                <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-8 w-auto object-contain">
+                <div>
+                    <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
+                    <span class="text-[10px] uppercase tracking-widest text-ink-muted block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
+                </div>
             </div>
 
             <div class="flex flex-wrap gap-6 uppercase tracking-wider text-[11px] text-ink-muted">
@@ -440,93 +433,6 @@
         </div>
     </footer>
 
-    <!-- RESERVATION MODAL (CLEAN ARCHITECTURAL DRAWER / FORM) -->
-    <div id="reservation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
-        <!-- Understated backdrop -->
-        <div onclick="closeReservationModal()" class="fixed inset-0 bg-ink/40"></div>
-        
-        <!-- Modal Content Container -->
-        <div class="relative z-10 bg-beige hairline-all max-w-lg w-full p-6 sm:p-8 shadow-lg">
-            <div class="flex items-start justify-between pb-4 hairline-b mb-6">
-                <div>
-                    <span class="text-[10px] uppercase tracking-[0.2em] text-ink-muted block">Δελτιο Κρατησης</span>
-                    <h3 class="text-xl uppercase tracking-wider text-ink font-normal mt-1">
-                        Κρατηση στο Morrison
-                    </h3>
-                </div>
-                <button onclick="closeReservationModal()" class="text-xs uppercase tracking-widest text-ink-muted hover:text-ink p-1">
-                    [Κλεισιμο]
-                </button>
-            </div>
-
-            <form onsubmit="handleReservationSubmit(event)" class="space-y-4 text-xs">
-                <div>
-                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ονοματεπωνυμο *</label>
-                    <input type="text" required placeholder="π.χ. Αλέξανδρος Παπαδόπουλος" class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Τηλεφωνο *</label>
-                        <input type="tel" required placeholder="π.χ. 6900000000" class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                    </div>
-                    <div>
-                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ημερομηνια *</label>
-                        <input type="date" id="booking-date" required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Ωρα Αφιξης *</label>
-                        <select required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                            <option value="10:30">10:30 (Καφές & Brunch)</option>
-                            <option value="12:30">12:30 (Brunch)</option>
-                            <option value="15:00">15:00 (Μεσημεριανό)</option>
-                            <option value="18:30">18:30 (Sunset View)</option>
-                            <option value="20:30" selected>20:30 (Δείπνο)</option>
-                            <option value="22:30">22:30 (Cocktails & Bar)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Αριθμος Ατομων *</label>
-                        <select required class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                            <option value="1">1 άτομο</option>
-                            <option value="2" selected>2 άτομα</option>
-                            <option value="3">3 άτομα</option>
-                            <option value="4">4 άτομα</option>
-                            <option value="5">5 άτομα</option>
-                            <option value="6+">6+ άτομα</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Προτιμηση Ζωνης</label>
-                    <select class="w-full bg-beige-tint hairline-all px-3 py-2.5 text-xs text-ink">
-                        <option value="terrace">Skyline Deck (Εξωτερικός χώρος με θέα)</option>
-                        <option value="dining">Dining Deck (Τραπέζι φαγητού)</option>
-                        <option value="bar">Central Bar (Υψηλό κάθισμα / Ποτό)</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block uppercase tracking-wider text-ink-muted text-[10px] mb-1">Σημειωσεις / Ειδικες Προτιμησεις</label>
-                    <textarea rows="2" placeholder="π.χ. Τραπέζι κοντά στο τζάμι, επέτειος κτλ." class="w-full bg-beige-tint hairline-all px-3 py-2 text-xs text-ink"></textarea>
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="w-full py-3 bg-ink text-beige text-xs uppercase tracking-[0.16em] hover:bg-ink-soft transition-colors">
-                        Υποβολη Αιτηματος Κρατησης
-                    </button>
-                    <p class="text-[10px] text-center text-ink-muted mt-2">
-                        Η ομάδα του Morrison θα σας καλέσει άμεσα για επιβεβαίωση.
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- CLEAN FEEDBACK BANNER (NO FLASHY TOAST) -->
     <div id="status-toast" class="fixed bottom-6 right-6 z-50 hidden bg-beige hairline-all p-4 shadow-md max-w-sm text-xs">
         <div class="flex items-start justify-between gap-4">
@@ -540,40 +446,12 @@
 
     <!-- JAVASCRIPT: CLEAN VANILLA LOGIC -->
     <script>
-        // Set date minimum to today
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            const dateInput = document.getElementById('booking-date');
-            if (dateInput) {
-                dateInput.min = today;
-                dateInput.value = today;
-            }
-        });
-
         // Mobile Nav Toggle
         function toggleMobileNav() {
             const nav = document.getElementById('mobile-nav');
             if (nav) {
                 nav.classList.toggle('hidden');
             }
-        }
-
-        // Reservation Modal Controls
-        const modal = document.getElementById('reservation-modal');
-        function openReservationModal() {
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeReservationModal() {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function handleReservationSubmit(e) {
-            e.preventDefault();
-            closeReservationModal();
-            showNotice('Κρατηση', 'Το αίτημά σας καταχωρήθηκε. Θα επικοινωνήσουμε τηλεφωνικά για την επιβεβαίωση.');
         }
 
         // Copy to clipboard utility
