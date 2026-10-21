@@ -19,7 +19,7 @@
                 extend: {
                     colors: {
                         beige: {
-                            DEFAULT: '#F3EBE1', // Απαλό, ζεστό μπεζ
+                            DEFAULT: '#F3EBE1',
                             tint: '#FAF6F1',
                             muted: '#E8DDD1',
                             border: '#D5C8B9'
@@ -96,6 +96,27 @@
         .slide-img {
             transition: opacity 1.2s ease-in-out;
         }
+
+        /* Animation για τα γράμματα της αρχικής */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-hero-text {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige">
@@ -170,33 +191,33 @@
             <img src="morrison3.jpg" alt="Morrison Dining Area" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="2">
             <img src="morrison4.jpg" alt="Morrison Ambience" class="slide-img absolute inset-0 w-full h-full object-cover opacity-0" data-slide="3">
             
-            <!-- Απαλό overlay με θόλωμα αντί για βαρύ χρώμα -->
-            <div class="absolute inset-0 bg-gradient-to-r from-beige/80 via-beige/40 to-transparent"></div>
-            <!-- Ελαφρύ backdrop blur για να «μαλακώσει» η εικόνα χωρίς να χαθεί -->
+            <!-- Σκούρο gradient για να φαίνονται τα λευκά γράμματα -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+            <!-- Ελαφρύ backdrop blur για να «μαλακώσει» η εικόνα -->
             <div class="absolute inset-0 backdrop-blur-[2px]"></div>
         </div>
 
         <!-- Foreground Content (Relative Positioned) -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="max-w-4xl">
-                <span class="text-[11px] uppercase tracking-[0.25em] text-ink-soft block mb-4 drop-shadow-sm">
-                    Τευχος Τοποθεσιας — 17ης Νοεμβριου 87, Πυλαια
+            <div class="max-w-2xl">
+                <span class="animate-hero-text text-[11px] uppercase tracking-[0.25em] text-white/90 block mb-4 drop-shadow-sm">
+                    Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία
                 </span>
                 
-                <h1 class="text-3xl sm:text-5xl md:text-6xl uppercase tracking-[0.06em] text-ink font-normal leading-[1.18] mb-8 drop-shadow-md">
-                    Η αστικη θεα απο ψηλα. <br>
-                    Καφες, brunch και dining <br>
-                    σε καθαρες γραμμες.
+                <h1 class="animate-hero-text animation-delay-200 text-3xl sm:text-4xl md:text-5xl text-white font-normal leading-[1.3] mb-8 drop-shadow-md">
+                    Η αστική θέα από ψηλά. <br>
+                    Καφές, brunch και dining <br>
+                    σε καθαρές γραμμές.
                 </h1>
             </div>
         </div>
 
         <!-- Navigation Dots -->
         <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-20">
-            <button onclick="setSlide(0)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-100 transition-opacity duration-300"></button>
-            <button onclick="setSlide(1)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
-            <button onclick="setSlide(2)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
-            <button onclick="setSlide(3)" class="slide-dot w-2.5 h-2.5 rounded-full bg-ink opacity-40 hover:opacity-100 transition-opacity duration-300"></button>
+            <button onclick="setSlide(0)" class="slide-dot w-2.5 h-2.5 rounded-full bg-white opacity-100 transition-opacity duration-300 shadow-sm"></button>
+            <button onclick="setSlide(1)" class="slide-dot w-2.5 h-2.5 rounded-full bg-white opacity-40 hover:opacity-100 transition-opacity duration-300 shadow-sm"></button>
+            <button onclick="setSlide(2)" class="slide-dot w-2.5 h-2.5 rounded-full bg-white opacity-40 hover:opacity-100 transition-opacity duration-300 shadow-sm"></button>
+            <button onclick="setSlide(3)" class="slide-dot w-2.5 h-2.5 rounded-full bg-white opacity-40 hover:opacity-100 transition-opacity duration-300 shadow-sm"></button>
         </div>
     </section>
 
