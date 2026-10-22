@@ -116,20 +116,23 @@ html:not(.js) .s:first-child{opacity:1}
 .wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate;will-change:transform;transform:translateZ(0)}
 @keyframes dr{from{transform:translateX(-6%) translateZ(0)}to{transform:translateX(6%) translateZ(0)}}
 
-/* Map Fix: Remove heavy blur, use safe opacity/grayscale so it doesn't break */
-.mp iframe{
-  filter: grayscale(100%) sepia(30%) opacity(0.6);
-  transition: filter 1s var(--ex);
+/* Map Fix: Overlay αντί για filter για να δουλεύει παντού */
+.mp { position: relative; }
+.mp::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #F3EBE1;
+  opacity: 0.6;
+  mix-blend-mode: color;
+  pointer-events: none; /* Να μπορείς να κλικάρεις τον χάρτη */
+  transition: opacity 0.7s ease;
 }
 @media(hover:hover){
-  .mp:hover iframe, .mp:focus-within iframe {
-    filter: none;
-  }
+  .mp:hover::after { opacity: 0; }
 }
 @media(hover:none){
-  .mp iframe:active, .mp:focus-within iframe {
-    filter: none;
-  }
+  .mp:active::after { opacity: 0; }
 }
 
 /* Social Icons */
@@ -357,8 +360,8 @@ html:not(.js) .s:first-child{opacity:1}
     <!-- Map Column -->
     <div class="lg:col-span-6 rv" style="--d:.15s">
       <div class="fr bg-beige p-3 flex flex-col h-full">
-        <div class="mp mk relative w-full flex-1 min-h-[320px] lg:min-h-[380px] overflow-hidden" style="--d:.2s">
-          <!-- Διορθωμένο και 100% λειτουργικό Embed URL -->
+        <!-- Σταθερό ύψος, χωρίς mk class, overlay αντί για filter -->
+        <div class="mp relative w-full h-[350px] lg:h-[420px] overflow-hidden bg-beige-border/20" style="--d:.2s">
           <iframe title="Morrison Rooftop Location Map" src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&t=&z=16&ie=UTF8&iwloc=&output=embed" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="pt-3 flex flex-wrap items-center justify-between gap-x-4 text-[11px] uppercase tracking-widest text-ink-muted">
@@ -434,7 +437,7 @@ $$('#mn a').forEach(a=>a.addEventListener('click',()=>tog(false)));
 addEventListener('keydown',e=>e.key==='Escape'&&tog(false));
 matchMedia('(min-width:768px)').addEventListener('change',e=>e.matches&&tog(false));
 
-// Scroll: header state, progress line, hero caption drift (Optimized with translate3d)
+// Scroll: header state, progress line, hero caption drift
 const hd=$('#hd'),bar=$('#bar'),cap=$('#cap');let tk=0;
 function sc(){
   const y=scrollY,mx=document.documentElement.scrollHeight-innerHeight;
