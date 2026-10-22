@@ -34,12 +34,9 @@ html.lock,html.lock body{overflow:hidden}
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes lnk{to{transform:none}}
 
-/* Hero: continuous zoom-in, sharp rendering */
-.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transform-origin:50% 55%;backface-visibility:hidden;transform:translateZ(0)}
-.s.on,.s.pv{animation:zi 12s linear forwards;will-change:transform}
-.s.pv{opacity:1;z-index:1}
-.s.on{opacity:1;z-index:2;transition:opacity 1.8s ease}
-@keyframes zi{from{transform:scale(1) translateZ(0)}to{transform:scale(1.08) translateZ(0)}}
+/* Hero: Smooth fade, NO continuous zoom/parallax to prevent lag */
+.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transition:opacity 1.5s ease-in-out}
+.s.on{opacity:1;z-index:2}
 html:not(.js) .s:first-child{opacity:1}
 .hf{animation:frm 1.8s var(--ex) 2.2s both}
 @keyframes frm{from{opacity:0;transform:scale(1.025)}}
@@ -68,11 +65,10 @@ html:not(.js) .s:first-child{opacity:1}
 .js .ln.in{transform:scaleX(1)}.js .lv.in{transform:scaleY(1)}
 .sl{position:absolute;top:0;left:0;right:0;height:1px;background:#D5C8B9}
 
-/* Header & Mobile */
+/* Header & Mobile - Removed backdrop-filter (heavy) */
 #hd{transition:padding .7s var(--ex),background-color .7s,box-shadow .7s}
-#hd.hs{padding-top:12px;padding-bottom:12px;background-color:rgba(243,235,225,.98);box-shadow:0 14px 30px -18px rgba(30,28,26,.18)}
+#hd.hs{padding-top:12px;padding-bottom:12px;background-color:#F3EBE1;box-shadow:0 14px 30px -18px rgba(30,28,26,.18)}
 #hd .lg{transition:height .7s var(--ex)}#hd.hs .lg{height:34px}
-@media(min-width:768px){#hd.hs{backdrop-filter:blur(12px)}}
 .burger{position:relative;width:44px;height:44px;margin-right:-10px}
 .burger i{position:absolute;left:10px;top:15px;height:1.5px;width:24px;background:#1E1C1A;transition:transform .7s var(--ex),width .5s var(--ex),opacity .3s}
 .burger i:nth-child(2){top:21px;width:16px}.burger i:nth-child(3){top:27px}
@@ -113,19 +109,18 @@ html:not(.js) .s:first-child{opacity:1}
 .in .st svg{opacity:1;transform:none}
 .st svg:nth-child(1){transition-delay:.45s}.st svg:nth-child(2){transition-delay:.55s}.st svg:nth-child(3){transition-delay:.65s}.st svg:nth-child(4){transition-delay:.75s}.st svg:nth-child(5){transition-delay:.85s}
 
-.wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate;will-change:transform;transform:translateZ(0)}
-@keyframes dr{from{transform:translateX(-6%) translateZ(0)}to{transform:translateX(6%) translateZ(0)}}
+/* Static Background Text (No animation) */
+.wm{display:inline-block}
 
-/* Map Fix: Overlay αντί για filter για να δουλεύει παντού */
+/* Map Fix: Simple overlay, no mix-blend-mode */
 .mp { position: relative; }
 .mp::after {
   content: '';
   position: absolute;
   inset: 0;
   background-color: #F3EBE1;
-  opacity: 0.6;
-  mix-blend-mode: color;
-  pointer-events: none; /* Να μπορείς να κλικάρεις τον χάρτη */
+  opacity: 0.65;
+  pointer-events: none;
   transition: opacity 0.7s ease;
 }
 @media(hover:hover){
@@ -146,9 +141,16 @@ html:not(.js) .s:first-child{opacity:1}
 #ts{position:fixed;right:24px;bottom:max(24px,env(safe-area-inset-bottom));z-index:60;visibility:hidden;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ex),transform .5s var(--ex),visibility 0s .5s}
 #ts.show{visibility:visible;opacity:1;transform:none;transition-delay:0s}
 @media(max-width:640px){#ts{left:16px;right:16px}}
+
+/* Content Visibility Auto for Performance */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
 @media(prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
-.s.on,.s.pv{animation:none!important}}
+}
 </style>
 </head>
 <body class="relative">
@@ -190,7 +192,7 @@ html:not(.js) .s:first-child{opacity:1}
   <i id="bar" class="absolute left-0 w-full h-px bg-ink" style="bottom:-1px;transform:scaleX(0);transform-origin:left"></i>
 </header>
 
-<!-- MOBILE MENU (Updated Titles to match Desktop) -->
+<!-- MOBILE MENU -->
 <div id="mn" aria-hidden="true" class="md:hidden fixed inset-0 z-[45] bg-beige px-6 pt-36 pb-10 flex flex-col justify-between overflow-y-auto">
   <nav class="flex flex-col">
     <a href="#about" class="ml py-5 text-[15px] uppercase tracking-[0.2em] text-ink" style="--i:0"><span>Χωρος</span></a>
@@ -204,21 +206,20 @@ html:not(.js) .s:first-child{opacity:1}
 <!-- HERO -->
 <section class="relative min-h-[88svh] w-full overflow-hidden flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-12 bg-ink">
   <div class="absolute inset-0 z-0">
-    <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[70%_center]">
-    <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_65%]">
-    <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_70%]">
-    <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_60%]">
+    <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="s on" data-slide="0">
+    <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="s" data-slide="1">
+    <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="s" data-slide="2">
+    <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="s" data-slide="3">
     <div class="absolute inset-0 z-[3] bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
   </div>
   <div class="hf absolute inset-3 md:inset-6 border border-white/25 z-10 pointer-events-none"></div>
 
-  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10" style="will-change: transform;">
+  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10">
     <div class="max-w-5xl">
       <div class="fade flex items-center gap-4 mb-4">
         <i class="hl hidden sm:block shrink-0"></i>
         <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/80">17ης Νοεμβρίου 87, Πυλαία</span>
       </div>
-      <!-- Μικρότερος τίτλος -->
       <h1 id="hl" class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 font-normal leading-[1.3]">Η αστική θέα από ψηλά. Καφές, ποτό και dining σε καθαρές γραμμές.</h1>
     </div>
   </div>
@@ -229,7 +230,7 @@ html:not(.js) .s:first-child{opacity:1}
   <i class="sc hidden md:block"></i>
 </section>
 
-<!-- ABOUT (Centered Layout) -->
+<!-- ABOUT -->
 <section id="about" class="relative py-24 md:py-28 px-6 md:px-12 bg-beige-tint overflow-hidden scroll-mt-24">
   <i class="sl ln"></i>
   <div class="max-w-3xl mx-auto text-center rv">
@@ -335,7 +336,6 @@ html:not(.js) .s:first-child{opacity:1}
           </div>
         </div>
 
-        <!-- Social Media & Email Links -->
         <div class="pt-4 hairline-t">
           <span class="text-[10px] uppercase tracking-widest text-ink-muted block mb-3">Επικοινωνια &amp; Social</span>
           <div class="flex flex-wrap items-center gap-6">
@@ -357,10 +357,8 @@ html:not(.js) .s:first-child{opacity:1}
       </div>
     </div>
 
-    <!-- Map Column -->
     <div class="lg:col-span-6 rv" style="--d:.15s">
       <div class="fr bg-beige p-3 flex flex-col h-full">
-        <!-- Σταθερό ύψος, χωρίς mk class, overlay αντί για filter -->
         <div class="mp relative w-full h-[350px] lg:h-[420px] overflow-hidden bg-beige-border/20" style="--d:.2s">
           <iframe title="Morrison Rooftop Location Map" src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&t=&z=16&ie=UTF8&iwloc=&output=embed" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
@@ -415,18 +413,16 @@ const h=$('#hl'),words=h.textContent.trim().split(' ');
 h.textContent='';
 words.forEach((t,i)=>{const a=document.createElement('span'),b=document.createElement('span');a.className='w';b.style.setProperty('--i',i);b.textContent=t;a.append(b);h.append(a,' ')});
 
-// Hero slideshow
-const S=$$('.s'),D=$$('.dt');let c=-1,tm;
+// Hero slideshow (Simple fade)
+const S=$$('.s'),D=$$('.dt');let c=0,tm;
 function go(n){
   if(n===c)return;
-  S.forEach((s,i)=>{if(i!==c)s.classList.remove('pv','on')});
-  if(c>=0){S[c].classList.remove('on');S[c].classList.add('pv')}
-  void S[n].offsetWidth;
+  S[c].classList.remove('on');
   S[n].classList.add('on');
   D.forEach((d,i)=>{d.classList.remove('on');if(i===n){void d.offsetWidth;d.classList.add('on')}});
   c=n;clearTimeout(tm);tm=setTimeout(()=>go((n+1)%S.length),7000);
 }
-D.forEach((d,i)=>d.onclick=()=>go(i));
+D.forEach((d,i)=>d.onclick=()=>{clearTimeout(tm);go(i);});
 setTimeout(()=>go(0),rm?0:1900);
 
 // Mobile menu
@@ -437,16 +433,12 @@ $$('#mn a').forEach(a=>a.addEventListener('click',()=>tog(false)));
 addEventListener('keydown',e=>e.key==='Escape'&&tog(false));
 matchMedia('(min-width:768px)').addEventListener('change',e=>e.matches&&tog(false));
 
-// Scroll: header state, progress line, hero caption drift
-const hd=$('#hd'),bar=$('#bar'),cap=$('#cap');let tk=0;
+// Scroll: header state, progress line (Removed Parallax to fix lag)
+const hd=$('#hd'),bar=$('#bar');let tk=0;
 function sc(){
   const y=scrollY,mx=document.documentElement.scrollHeight-innerHeight;
   hd.classList.toggle('hs',y>50);
   bar.style.transform='scaleX('+(mx>0?Math.min(1,y/mx):0)+')';
-  if(!rm&&y<innerHeight){
-    cap.style.transform='translate3d(0,'+y*.22+'px,0)';
-    cap.style.opacity=Math.max(0,1-y/(innerHeight*.7));
-  }
   tk=0;
 }
 addEventListener('scroll',()=>{tk||(tk=requestAnimationFrame(sc))},{passive:true});sc();
