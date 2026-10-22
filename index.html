@@ -113,14 +113,13 @@ html:not(.js) .s:first-child{opacity:1}
 .in .st svg{opacity:1;transform:none}
 .st svg:nth-child(1){transition-delay:.45s}.st svg:nth-child(2){transition-delay:.55s}.st svg:nth-child(3){transition-delay:.65s}.st svg:nth-child(4){transition-delay:.75s}.st svg:nth-child(5){transition-delay:.85s}
 
-.wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate}
-@keyframes dr{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+.wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate;will-change:transform;transform:translateZ(0)}
+@keyframes dr{from{transform:translateX(-6%) translateZ(0)}to{transform:translateX(6%) translateZ(0)}}
 
-/* Map: Blurred and tinted by default, unblur on hover */
+/* Map Fix: Remove heavy blur, use safe opacity/grayscale so it doesn't break */
 .mp iframe{
-  filter: blur(4px) grayscale(100%) sepia(30%) opacity(0.6);
+  filter: grayscale(100%) sepia(30%) opacity(0.6);
   transition: filter 1s var(--ex);
-  will-change: filter;
 }
 @media(hover:hover){
   .mp:hover iframe, .mp:focus-within iframe {
@@ -134,13 +133,8 @@ html:not(.js) .s:first-child{opacity:1}
 }
 
 /* Social Icons */
-.soc-icon {
-  transition: all 0.4s var(--ex);
-}
-.soc-icon:hover {
-  transform: translateY(-2px);
-  color: #1E1C1A;
-}
+.soc-icon { transition: all 0.4s var(--ex); }
+.soc-icon:hover { transform: translateY(-2px); color: #1E1C1A; }
 
 .icon-phone:hover svg{animation:ring .5s ease-in-out}
 @keyframes ring{25%{transform:rotate(15deg)}50%{transform:rotate(-10deg)}75%{transform:rotate(5deg)}}
@@ -214,7 +208,7 @@ html:not(.js) .s:first-child{opacity:1}
   </div>
   <div class="hf absolute inset-3 md:inset-6 border border-white/25 z-10 pointer-events-none"></div>
 
-  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10">
+  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10" style="will-change: transform;">
     <div class="max-w-5xl">
       <div class="fade flex items-center gap-4 mb-4">
         <i class="hl hidden sm:block shrink-0"></i>
@@ -236,11 +230,9 @@ html:not(.js) .s:first-child{opacity:1}
   <i class="sl ln"></i>
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-0">
     <div class="md:col-span-4 md:pr-10">
-      <!-- Αφαιρέθηκε το "Σημειωμα Χωρου" από εδώ -->
       <h2 class="mk text-2xl md:text-3xl uppercase tracking-wider text-ink font-normal leading-snug" style="--d:.1s">Ηρεμια, οριζοντας <br>και συνεπεια.</h2>
     </div>
     <div class="md:col-span-8 relative md:pl-14 space-y-8 text-sm text-ink-soft leading-[1.9] max-w-2xl md:max-w-none">
-      <!-- Τοποθετήθηκε στο κέντρο πάνω από το κείμενο -->
       <span class="rv text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3 text-center md:text-left">Σημειωμα Χωρου</span>
       <i class="lv hidden md:block absolute left-0 top-0 w-px h-full bg-beige-border"></i>
       <p class="rv" style="--d:.15s">Μακριά από τη φασαρία του κέντρου αλλά με άμεση πρόσβαση από τον Περιφερειακό, το rooftop του Morrison διαμορφώθηκε για να προσφέρει έναν ευρύχωρο και τακτοποιημένο προορισμό. Ο χώρος παραμένει φωτεινός τις πρωινές ώρες για καφέ και brunch, ενώ καθώς δύει ο ήλιος μετατρέπεται σε ένα ατμοσφαιρικό σημείο συνάντησης για φαγητό και ποτό.</p>
@@ -327,7 +319,6 @@ html:not(.js) .s:first-child{opacity:1}
     <div class="lg:col-span-6 space-y-8 rv">
       <div>
         <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Προσβαση &amp; Στοιχεια</span>
-        <!-- Μικρότερος τίτλος διεύθυνσης -->
         <h2 class="text-lg sm:text-xl md:text-2xl uppercase tracking-wider text-ink font-normal">17ης Νοεμβριου 87</h2>
         <p class="text-xs uppercase tracking-widest text-ink-muted mt-2">Πυλαια 555 35, Θεσσαλονικη — JX5X+7F</p>
       </div>
@@ -367,8 +358,8 @@ html:not(.js) .s:first-child{opacity:1}
     <div class="lg:col-span-6 rv" style="--d:.15s">
       <div class="fr bg-beige p-3 flex flex-col h-full">
         <div class="mp mk relative w-full flex-1 min-h-[320px] lg:min-h-[380px] overflow-hidden" style="--d:.2s">
-          <!-- Διορθωμένο Embed URL με Place ID για σωστή φόρτωση -->
-          <iframe title="Morrison Rooftop Location Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3029.7426369062326!2d22.9863266!3d40.5913867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a83e0dcfa72a0f%3A0x6b80145c22ee3a22!2sMorrison%20The%20Premium%20Rooftop!5e0!3m2!1sel!2sgr!4v1710000000000!5m2!1sel!2sgr" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <!-- Διορθωμένο και 100% λειτουργικό Embed URL -->
+          <iframe title="Morrison Rooftop Location Map" src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&t=&z=16&ie=UTF8&iwloc=&output=embed" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="pt-3 flex flex-wrap items-center justify-between gap-x-4 text-[11px] uppercase tracking-widest text-ink-muted">
           <span>17ης Νοεμβρίου 87, Πυλαία</span><span>Τηλ: 231 602 0535</span>
@@ -443,13 +434,16 @@ $$('#mn a').forEach(a=>a.addEventListener('click',()=>tog(false)));
 addEventListener('keydown',e=>e.key==='Escape'&&tog(false));
 matchMedia('(min-width:768px)').addEventListener('change',e=>e.matches&&tog(false));
 
-// Scroll: header state, progress line, hero caption drift
+// Scroll: header state, progress line, hero caption drift (Optimized with translate3d)
 const hd=$('#hd'),bar=$('#bar'),cap=$('#cap');let tk=0;
 function sc(){
   const y=scrollY,mx=document.documentElement.scrollHeight-innerHeight;
   hd.classList.toggle('hs',y>50);
   bar.style.transform='scaleX('+(mx>0?Math.min(1,y/mx):0)+')';
-  if(!rm&&y<innerHeight){cap.style.transform='translateY('+y*.22+'px)';cap.style.opacity=Math.max(0,1-y/(innerHeight*.7))}
+  if(!rm&&y<innerHeight){
+    cap.style.transform='translate3d(0,'+y*.22+'px,0)';
+    cap.style.opacity=Math.max(0,1-y/(innerHeight*.7));
+  }
   tk=0;
 }
 addEventListener('scroll',()=>{tk||(tk=requestAnimationFrame(sc))},{passive:true});sc();
@@ -461,7 +455,7 @@ if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches)$$('.btn').forEac
     if(raf) return;
     raf = requestAnimationFrame(()=>{
       const r=b.getBoundingClientRect();
-      b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.12+'px,'+(e.clientY-r.top-r.height/2)*.25+'px)';
+      b.style.transform='translate3d('+(e.clientX-r.left-r.width/2)*.12+'px,'+(e.clientY-r.top-r.height/2)*.25+'px,0)';
       raf = null;
     });
   });
