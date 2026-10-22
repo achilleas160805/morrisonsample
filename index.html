@@ -24,7 +24,13 @@ body{background:#F3EBE1;color:#1E1C1A;letter-spacing:.02em;-webkit-font-smoothin
 html.lock,html.lock body{overflow:hidden}
 .hairline-b{border-bottom:1px solid #D5C8B9}.hairline-t{border-top:1px solid #D5C8B9}
 
-/* Intro curtain (pure CSS) */
+/* GPU Acceleration Base */
+.s, .hf, #cap, #bar, .wm, .btn, .dt, .st svg { 
+  transform: translateZ(0); 
+  backface-visibility: hidden; 
+}
+
+/* Intro curtain */
 #ld{position:fixed;inset:0;z-index:100;background:#F3EBE1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;animation:curtain 1.1s var(--io) 1.7s forwards}
 #ld img{height:56px;width:auto;opacity:0;animation:up 1s var(--ex) .2s forwards}
 #ld b{font-weight:400;font-size:13px;letter-spacing:.6em;padding-left:.6em;text-transform:uppercase;opacity:0;animation:up 1s var(--ex) .45s forwards}
@@ -32,32 +38,23 @@ html.lock,html.lock body{overflow:hidden}
 #ld i::after{content:'';position:absolute;inset:0;background:#1E1C1A;transform:scaleX(0);transform-origin:left;animation:lnk 1.3s var(--io) .3s forwards}
 @keyframes curtain{to{transform:translateY(-100%);visibility:hidden}}
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes lnk{to{transform:none}}
+@keyframes lnk{to{transform:scaleX(1)}}
 
-/* Hero: Optimized Smooth Zoom */
-.s {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; z-index: 0; 
-  transform: scale(1);
-  transition: opacity 1.5s ease-in-out, transform 8s linear;
-  will-change: opacity, transform;
-}
-.s.on {
-  opacity: 1; z-index: 2; transform: scale(1.08);
-}
-/* Όταν η εικόνα φεύγει, το zoom μηδενίζεται ακαριαία (0s) για να μην φαίνεται το τίναγμα */
-.s:not(.on) {
-  transition: opacity 1.5s ease-in-out, transform 0s;
-}
+/* Hero: continuous zoom-in (Restored & Optimized) */
+.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transform-origin:50% 55%;will-change:transform, opacity}
+.s.on,.s.pv{animation:zi 12s linear forwards}
+.s.pv{opacity:1;z-index:1}
+.s.on{opacity:1;z-index:2;transition:opacity 1.8s ease}
+@keyframes zi{from{transform:scale(1) translateZ(0)}to{transform:scale(1.16) translateZ(0)}}
 html:not(.js) .s:first-child{opacity:1}
 
-.hf{animation:frm 1.8s var(--ex) 2.2s both}
+.hf{animation:frm 1.8s var(--ex) 2.2s both; will-change: transform, opacity}
 @keyframes frm{from{opacity:0;transform:scale(1.025)}}
 .fade{opacity:0;animation:up 1.2s var(--ex) 2.4s forwards}
 .hl{width:48px;height:1px;background:rgba(255,255,255,.6);transform:scaleX(0);transform-origin:left;animation:lnk 1.4s var(--ex) 2.3s forwards}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
 .w>span{display:inline-block;transform:translateY(115%);animation:rise 1.2s var(--ex) forwards;animation-delay:calc(2.5s + var(--i)*.08s)}
-@keyframes rise{to{transform:none}}
+@keyframes rise{to{transform:translateY(0)}}
 .dt{position:relative;width:34px;height:24px}
 .dt::before,.dt::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.35)}
 .dt::after{background:#fff;transform:scaleX(0);transform-origin:left}
@@ -67,38 +64,45 @@ html:not(.js) .s:first-child{opacity:1}
 .sc::after{content:'';position:absolute;inset:0;background:#fff;transform:translateY(-100%);animation:scd 2.6s var(--io) 3.2s infinite}
 @keyframes scd{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
-/* Scroll reveals */
-.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ex),transform 1.1s var(--ex);transition-delay:var(--d,0s)}
-.js .mk{clip-path:inset(0 -6px 100% -6px);transform:translateY(22px);transition:clip-path 1.2s var(--ex),transform 1.2s var(--ex);transition-delay:var(--d,0s)}
-.js .ln{transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ex);transition-delay:var(--d,0s)}
+/* Scroll reveals (Optimized with will-change) */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ex),transform 1.1s var(--ex);transition-delay:var(--d,0s); will-change:opacity, transform}
+.js .mk{clip-path:inset(0 -6px 100% -6px);transform:translateY(22px);transition:clip-path 1.2s var(--ex),transform 1.2s var(--ex);transition-delay:var(--d,0s); will-change:clip-path, transform}
+.js .ln{transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ex);transition-delay:var(--d,0s); will-change:transform}
 .js .ln.r{transform-origin:right}
-.js .lv{transform:scaleY(0);transform-origin:top;transition:transform 1.8s var(--ex);transition-delay:var(--d,0s)}
+.js .lv{transform:scaleY(0);transform-origin:top;transition:transform 1.8s var(--ex);transition-delay:var(--d,0s); will-change:transform}
 .js .rv.in{opacity:1;transform:none}
 .js .mk.in{clip-path:inset(-6px);transform:none}
 .js .ln.in{transform:scaleX(1)}.js .lv.in{transform:scaleY(1)}
 .sl{position:absolute;top:0;left:0;right:0;height:1px;background:#D5C8B9}
 
-/* Header & Mobile (No heavy backdrop-filter) */
+/* Header & Mobile (Restored Backdrop-filter with GPU hack) */
 #hd{transition:padding .7s var(--ex),background-color .7s,box-shadow .7s}
-#hd.hs{padding-top:12px;padding-bottom:12px;background-color:#F3EBE1;box-shadow:0 14px 30px -18px rgba(30,28,26,.18)}
+#hd.hs{padding-top:12px;padding-bottom:12px;background-color:rgba(243,235,225,.98);box-shadow:0 14px 30px -18px rgba(30,28,26,.18); will-change:padding, background-color, box-shadow}
 #hd .lg{transition:height .7s var(--ex)}#hd.hs .lg{height:34px}
+@media(min-width:768px){
+  #hd.hs{
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateZ(0); /* Αναγκάζει το GPU rendering */
+  }
+}
 .burger{position:relative;width:44px;height:44px;margin-right:-10px}
 .burger i{position:absolute;left:10px;top:15px;height:1.5px;width:24px;background:#1E1C1A;transition:transform .7s var(--ex),width .5s var(--ex),opacity .3s}
 .burger i:nth-child(2){top:21px;width:16px}.burger i:nth-child(3){top:27px}
 .burger.open i:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .burger.open i:nth-child(2){opacity:0;transform:scaleX(0)}
 .burger.open i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-#mn{visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--io),visibility 0s .9s}
+#mn{visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--io),visibility 0s .9s; will-change:clip-path}
 #mn.open{visibility:visible;clip-path:inset(0);transition:clip-path .9s var(--io),visibility 0s}
 .ml{display:block;position:relative;overflow:hidden}
-.ml span{display:block;transform:translateY(110%);transition:transform .9s var(--ex)}
+.ml span{display:block;transform:translateY(110%);transition:transform .9s var(--ex); will-change:transform}
 .ml::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#D5C8B9;transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ex)}
 .open .ml span{transform:none;transition-delay:calc(.35s + var(--i)*.08s)}
 .open .ml::after{transform:none;transition-delay:calc(.4s + var(--i)*.08s)}
 
 /* Buttons */
-.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:16px;padding:19px 34px;background:#1E1C1A;color:#F3EBE1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:transform .5s var(--ex),color .6s var(--ex)}
-.btn::before{content:'';position:absolute;inset:0;background:#E8DDD1;transform:scaleY(0);transform-origin:bottom;transition:transform .7s var(--ex);z-index:-1}
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:16px;padding:19px 34px;background:#1E1C1A;color:#F3EBE1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:transform .5s var(--ex),color .6s var(--ex); will-change:transform, color}
+.btn::before{content:'';position:absolute;inset:0;background:#E8DDD1;transform:scaleY(0);transform-origin:bottom;transition:transform .7s var(--ex);z-index:-1; will-change:transform}
 .btn::after{content:'';position:absolute;inset:4px;border:1px solid rgba(243,235,225,.3);pointer-events:none;transition:inset .6s var(--ex),border-color .6s}
 .arw{position:relative;flex:none;width:28px;height:1px;background:currentColor;transition:width .6s var(--ex)}
 .arw::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-top:1px solid;border-right:1px solid;transform:rotate(45deg)}
@@ -107,7 +111,7 @@ html:not(.js) .s:first-child{opacity:1}
 @media(max-width:640px){.btn{width:100%;justify-content:center;text-align:center;padding:19px 20px}}
 
 /* Frames & Links */
-.fr{position:relative;border:1px solid #D5C8B9;transition:transform .8s var(--ex),box-shadow .8s var(--ex),border-color .8s}
+.fr{position:relative;border:1px solid #D5C8B9;transition:transform .8s var(--ex),box-shadow .8s var(--ex),border-color .8s; will-change:transform, box-shadow}
 .fr::after{content:'';position:absolute;inset:6px;border:1px solid rgba(213,200,185,.6);pointer-events:none;transition:inset .8s var(--ex),border-color .8s}
 @media(hover:hover){.fr:hover{transform:translateY(-6px);box-shadow:0 30px 50px -28px rgba(30,28,26,.3);border-color:#A6A095}.fr:hover::after{inset:10px;border-color:#A6A095}}
 
@@ -122,19 +126,22 @@ html:not(.js) .s:first-child{opacity:1}
 .in .st svg{opacity:1;transform:none}
 .st svg:nth-child(1){transition-delay:.45s}.st svg:nth-child(2){transition-delay:.55s}.st svg:nth-child(3){transition-delay:.65s}.st svg:nth-child(4){transition-delay:.75s}.st svg:nth-child(5){transition-delay:.85s}
 
-/* Static Background Text */
-.wm{display:inline-block}
+/* Background Text Animation (Restored) */
+.wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate; will-change:transform}
+@keyframes dr{from{transform:translateX(-6%) translateZ(0)}to{transform:translateX(6%) translateZ(0)}}
 
-/* Map Fix */
+/* Map Fix (Restored mix-blend-mode with GPU opt) */
 .mp { position: relative; }
 .mp::after {
   content: '';
   position: absolute;
   inset: 0;
   background-color: #F3EBE1;
-  opacity: 0.65;
+  opacity: 0.6;
+  mix-blend-mode: color;
   pointer-events: none;
   transition: opacity 0.7s ease;
+  will-change: opacity;
 }
 @media(hover:hover){
   .mp:hover::after { opacity: 0; }
@@ -155,7 +162,7 @@ html:not(.js) .s:first-child{opacity:1}
 #ts.show{visibility:visible;opacity:1;transform:none;transition-delay:0s}
 @media(max-width:640px){#ts{left:16px;right:16px}}
 
-/* Content Visibility Auto για ταχύτητα */
+/* Content Visibility Auto για να μην ζωγραφίζει το εκτός οθόνης */
 section {
   content-visibility: auto;
   contain-intrinsic-size: 1px 500px;
@@ -163,7 +170,7 @@ section {
 
 @media(prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
-}
+.s.on,.s.pv{animation:none!important}}
 </style>
 </head>
 <body class="relative">
@@ -202,7 +209,7 @@ section {
       <button id="bg" class="burger md:hidden" aria-label="Μενού" aria-expanded="false" aria-controls="mn"><i></i><i></i><i></i></button>
     </div>
   </div>
-  <i id="bar" class="absolute left-0 w-full h-px bg-ink" style="bottom:-1px;transform:scaleX(0);transform-origin:left"></i>
+  <i id="bar" class="absolute left-0 w-full h-px bg-ink" style="bottom:-1px;transform:scaleX(0);transform-origin:left; will-change:transform"></i>
 </header>
 
 <!-- MOBILE MENU -->
@@ -219,7 +226,7 @@ section {
 <!-- HERO -->
 <section class="relative min-h-[88svh] w-full overflow-hidden flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-12 bg-ink">
   <div class="absolute inset-0 z-0">
-    <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="s on" data-slide="0">
+    <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="s on pv" data-slide="0">
     <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="s" data-slide="1">
     <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="s" data-slide="2">
     <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="s" data-slide="3">
@@ -227,7 +234,7 @@ section {
   </div>
   <div class="hf absolute inset-3 md:inset-6 border border-white/25 z-10 pointer-events-none"></div>
 
-  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10">
+  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10" style="will-change: transform, opacity;">
     <div class="max-w-5xl">
       <div class="fade flex items-center gap-4 mb-4">
         <i class="hl hidden sm:block shrink-0"></i>
@@ -426,11 +433,13 @@ const h=$('#hl'),words=h.textContent.trim().split(' ');
 h.textContent='';
 words.forEach((t,i)=>{const a=document.createElement('span'),b=document.createElement('span');a.className='w';b.style.setProperty('--i',i);b.textContent=t;a.append(b);h.append(a,' ')});
 
-// Hero slideshow (Smooth transition with CSS)
-const S=$$('.s'),D=$$('.dt');let c=0,tm;
+// Hero slideshow
+const S=$$('.s'),D=$$('.dt');let c=-1,tm;
 function go(n){
   if(n===c)return;
-  S[c].classList.remove('on');
+  S.forEach((s,i)=>{if(i!==c)s.classList.remove('pv','on')});
+  if(c>=0){S[c].classList.remove('on');S[c].classList.add('pv')}
+  void S[n].offsetWidth;
   S[n].classList.add('on');
   D.forEach((d,i)=>{d.classList.remove('on');if(i===n){void d.offsetWidth;d.classList.add('on')}});
   c=n;clearTimeout(tm);tm=setTimeout(()=>go((n+1)%S.length),7000);
@@ -446,12 +455,17 @@ $$('#mn a').forEach(a=>a.addEventListener('click',()=>tog(false)));
 addEventListener('keydown',e=>e.key==='Escape'&&tog(false));
 matchMedia('(min-width:768px)').addEventListener('change',e=>e.matches&&tog(false));
 
-// Scroll: header state, progress line
-const hd=$('#hd'),bar=$('#bar');let tk=0;
+// Scroll: header state, progress line, hero caption drift (Restored Parallax with rAF)
+const hd=$('#hd'),bar=$('#bar'),cap=$('#cap');let tk=0;
 function sc(){
   const y=scrollY,mx=document.documentElement.scrollHeight-innerHeight;
   hd.classList.toggle('hs',y>50);
   bar.style.transform='scaleX('+(mx>0?Math.min(1,y/mx):0)+')';
+  
+  if(!rm&&y<innerHeight){
+    cap.style.transform='translate3d(0,'+y*.22+'px,0)';
+    cap.style.opacity=Math.max(0,1-y/(innerHeight*.7));
+  }
   tk=0;
 }
 addEventListener('scroll',()=>{tk||(tk=requestAnimationFrame(sc))},{passive:true});sc();
