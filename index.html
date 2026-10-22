@@ -1,742 +1,430 @@
 <!DOCTYPE html>
 <html lang="el" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Morrison • The Premium Rooftop | 17ης Νοεμβρίου 87, Πυλαία</title>
-    <link rel="icon" href="morrisonlogo.jpg" type="image/jpeg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<title>Morrison • The Premium Rooftop | 17ης Νοεμβρίου 87, Πυλαία</title>
+<link rel="icon" href="morrisonlogo.jpg" type="image/jpeg">
+<meta name="theme-color" content="#F3EBE1">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{beige:{DEFAULT:'#F3EBE1',tint:'#FAF6F1',muted:'#E8DDD1',border:'#D5C8B9'},ink:{DEFAULT:'#1E1C1A',soft:'#4A4641',muted:'#7A756D',faint:'#A6A095'}},fontFamily:{sans:['"Didact Gothic"','sans-serif']}}}}
+</script>
+<style>
+:root{--ex:cubic-bezier(.19,1,.22,1);--io:cubic-bezier(.76,0,.24,1)}
+*,*::before,*::after,input,button{font-family:'Didact Gothic',sans-serif!important;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#F3EBE1;color:#1E1C1A;letter-spacing:.02em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+::selection{background:#1E1C1A;color:#F3EBE1}
+:focus-visible{outline:1px solid #1E1C1A;outline-offset:4px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#F3EBE1}::-webkit-scrollbar-thumb{background:#D5C8B9}
+html.lock,html.lock body{overflow:hidden}
+.hairline-b{border-bottom:1px solid #D5C8B9}.hairline-t{border-top:1px solid #D5C8B9}
 
-    <!-- Google Fonts: Didact Gothic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS for fluid layout utility -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        beige: {
-                            DEFAULT: '#F3EBE1',
-                            tint: '#FAF6F1',
-                            muted: '#E8DDD1',
-                            border: '#D5C8B9'
-                        },
-                        ink: {
-                            DEFAULT: '#1E1C1A',
-                            soft: '#4A4641',
-                            muted: '#7A756D',
-                            faint: '#A6A095'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Didact Gothic"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+/* Intro curtain (pure CSS) */
+#ld{position:fixed;inset:0;z-index:100;background:#F3EBE1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;animation:curtain 1.1s var(--io) 1.7s forwards}
+#ld img{height:56px;width:auto;opacity:0;animation:up 1s var(--ex) .2s forwards}
+#ld b{font-weight:400;font-size:13px;letter-spacing:.6em;padding-left:.6em;text-transform:uppercase;opacity:0;animation:up 1s var(--ex) .45s forwards}
+#ld i{width:120px;height:1px;background:#D5C8B9;position:relative;overflow:hidden}
+#ld i::after{content:'';position:absolute;inset:0;background:#1E1C1A;transform:scaleX(0);transform-origin:left;animation:lnk 1.3s var(--io) .3s forwards}
+@keyframes curtain{to{transform:translateY(-100%);visibility:hidden}}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes lnk{to{transform:none}}
 
-    <style>
-        /* Premium Easing & Variables */
-        :root {
-            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-            --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
-        }
+/* Hero: continuous zoom-in, new slide fades in over the old one which keeps zooming underneath */
+.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transform-origin:50% 55%}
+.s.on,.s.pv{animation:zi 12s linear forwards;will-change:transform}
+.s.pv{opacity:1;z-index:1}
+.s.on{opacity:1;z-index:2;transition:opacity 1.8s ease}
+@keyframes zi{from{transform:scale(1)}to{transform:scale(1.16)}}
+html:not(.js) .s:first-child{opacity:1}
+.hf{animation:frm 1.8s var(--ex) 2.2s both}
+@keyframes frm{from{opacity:0;transform:scale(1.025)}}
+.fade{opacity:0;animation:up 1.2s var(--ex) 2.4s forwards}
+.hl{width:48px;height:1px;background:rgba(255,255,255,.6);transform:scaleX(0);transform-origin:left;animation:lnk 1.4s var(--ex) 2.3s forwards}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.w>span{display:inline-block;transform:translateY(115%);animation:rise 1.2s var(--ex) forwards;animation-delay:calc(2.5s + var(--i)*.08s)}
+@keyframes rise{to{transform:none}}
+.dt{position:relative;width:34px;height:24px}
+.dt::before,.dt::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.35)}
+.dt::after{background:#fff;transform:scaleX(0);transform-origin:left}
+.dt.on::after{animation:fl 7s linear forwards}
+@keyframes fl{to{transform:scaleX(1)}}
+.sc{position:absolute;left:50%;bottom:24px;width:1px;height:56px;background:rgba(255,255,255,.25);overflow:hidden;z-index:10}
+.sc::after{content:'';position:absolute;inset:0;background:#fff;transform:translateY(-100%);animation:scd 2.6s var(--io) 3.2s infinite}
+@keyframes scd{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
-        /* Strict Typographic Override */
-        *, *::before, *::after, input, button, select, textarea {
-            font-family: 'Didact Gothic', sans-serif !important;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+/* Scroll reveals: soft rise, curtain mask, drawn lines */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ex),transform 1.1s var(--ex);transition-delay:var(--d,0s)}
+.js .mk{clip-path:inset(0 -6px 100% -6px);transform:translateY(22px);transition:clip-path 1.2s var(--ex),transform 1.2s var(--ex);transition-delay:var(--d,0s)}
+.js .ln{transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ex);transition-delay:var(--d,0s)}
+.js .ln.r{transform-origin:right}
+.js .lv{transform:scaleY(0);transform-origin:top;transition:transform 1.8s var(--ex);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .mk.in{clip-path:inset(-6px);transform:none}
+.js .ln.in{transform:scaleX(1)}.js .lv.in{transform:scaleY(1)}
+.sl{position:absolute;top:0;left:0;right:0;height:1px;background:#D5C8B9}
 
-        body {
-            background-color: #F3EBE1;
-            color: #1E1C1A;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-            overflow-x: hidden;
-        }
+/* Header, burger, mobile overlay */
+#hd{transition:padding .7s var(--ex),background-color .7s,box-shadow .7s}
+#hd.hs{padding-top:12px;padding-bottom:12px;background-color:rgba(243,235,225,.98);box-shadow:0 14px 30px -18px rgba(30,28,26,.18)}
+#hd .lg{transition:height .7s var(--ex)}#hd.hs .lg{height:34px}
+@media(min-width:768px){#hd.hs{backdrop-filter:blur(12px)}}
+.burger{position:relative;width:44px;height:44px;margin-right:-10px}
+.burger i{position:absolute;left:10px;top:15px;height:1.5px;width:24px;background:#1E1C1A;transition:transform .7s var(--ex),width .5s var(--ex),opacity .3s}
+.burger i:nth-child(2){top:21px;width:16px}.burger i:nth-child(3){top:27px}
+.burger.open i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open i:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+#mn{visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .9s var(--io),visibility 0s .9s}
+#mn.open{visibility:visible;clip-path:inset(0);transition:clip-path .9s var(--io),visibility 0s}
+.ml{display:block;position:relative;overflow:hidden}
+.ml span{display:block;transform:translateY(110%);transition:transform .9s var(--ex)}
+.ml::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#D5C8B9;transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ex)}
+.open .ml span{transform:none;transition-delay:calc(.35s + var(--i)*.08s)}
+.open .ml::after{transform:none;transition-delay:calc(.4s + var(--i)*.08s)}
 
-        ::selection {
-            background-color: #1E1C1A;
-            color: #F3EBE1;
-        }
+/* Luxury buttons: flat ink, inner hairline frame, fill rises on hover, drawn arrow */
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:16px;padding:19px 34px;background:#1E1C1A;color:#F3EBE1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:transform .5s var(--ex),color .6s var(--ex)}
+.btn::before{content:'';position:absolute;inset:0;background:#E8DDD1;transform:scaleY(0);transform-origin:bottom;transition:transform .7s var(--ex);z-index:-1}
+.btn::after{content:'';position:absolute;inset:4px;border:1px solid rgba(243,235,225,.3);pointer-events:none;transition:inset .6s var(--ex),border-color .6s}
+.arw{position:relative;flex:none;width:28px;height:1px;background:currentColor;transition:width .6s var(--ex)}
+.arw::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-top:1px solid;border-right:1px solid;transform:rotate(45deg)}
+@media(hover:hover){.btn:hover{color:#1E1C1A}.btn:hover::before{transform:scaleY(1)}.btn:hover::after{inset:6px;border-color:rgba(30,28,26,.35)}.btn:hover .arw{width:42px}}
+.btn:active{opacity:.9}
+@media(max-width:640px){.btn{width:100%;justify-content:center;text-align:center;padding:19px 20px}}
 
-        /* Subtle hair-thin borders */
-        .hairline-b { border-bottom: 1px solid #D5C8B9; }
-        .hairline-t { border-top: 1px solid #D5C8B9; }
-        .hairline-r { border-right: 1px solid #D5C8B9; }
-        .hairline-all { border: 1px solid #D5C8B9; }
+/* Double-frame panels */
+.fr{position:relative;border:1px solid #D5C8B9;transition:transform .8s var(--ex),box-shadow .8s var(--ex),border-color .8s}
+.fr::after{content:'';position:absolute;inset:6px;border:1px solid rgba(213,200,185,.6);pointer-events:none;transition:inset .8s var(--ex),border-color .8s}
+@media(hover:hover){.fr:hover{transform:translateY(-6px);box-shadow:0 30px 50px -28px rgba(30,28,26,.3);border-color:#A6A095}.fr:hover::after{inset:10px;border-color:#A6A095}}
 
-        /* Custom understated scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #F3EBE1; }
-        ::-webkit-scrollbar-thumb { background: #D5C8B9; }
-        ::-webkit-scrollbar-thumb:hover { background: #7A756D; }
-
-        /* Header transition */
-        .header-scrolled {
-            background-color: rgba(243, 235, 225, 0.98);
-            box-shadow: 0 10px 30px -10px rgba(30, 28, 26, 0.08);
-            padding-top: 12px;
-            padding-bottom: 12px;
-        }
-
-        @media (min-width: 768px) {
-            .header-scrolled { backdrop-filter: blur(12px); }
-        }
-
-        /* --- PREMIUM BUTTONS --- */
-        .btn-premium {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1E1C1A 0%, #2C2825 100%);
-            transition: all 0.6s var(--ease-out-expo);
-            z-index: 1;
-            touch-action: manipulation;
-            border: 1px solid transparent;
-        }
-        
-        /* Λάμψη (Sheen effect) */
-        .btn-premium::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            transition: left 0.8s var(--ease-out-expo);
-            z-index: 2;
-        }
-
-        /* Εσωτερικό Glow */
-        .btn-premium::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1;
-        }
-
-        .btn-premium:hover::before { left: 150%; }
-        .btn-premium:hover::after { opacity: 1; }
-        
-        .btn-premium:hover {
-            box-shadow: 0 15px 30px -10px rgba(30, 28, 26, 0.4), 0 0 0 1px rgba(255,255,255,0.1);
-            transform: translateY(-3px) scale(1.02);
-            border-color: rgba(213, 200, 185, 0.3);
-        }
-
-        .btn-premium:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 5px 15px -5px rgba(30, 28, 26, 0.3);
-        }
-
-        /* Outline Buttons */
-        .btn-outline {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s var(--ease-out-expo);
-            touch-action: manipulation;
-            z-index: 1;
-        }
-        
-        .btn-outline::before {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 0%;
-            background-color: #E8DDD1;
-            transition: height 0.4s var(--ease-out-expo);
-            z-index: -1;
-        }
-
-        .btn-outline:hover::before { height: 100%; }
-        
-        .btn-outline:hover {
-            border-color: #1E1C1A;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(30, 28, 26, 0.1);
-        }
-
-        /* Animated Nav Links */
-        .nav-link {
-            position: relative;
-            padding: 4px 0;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 1px;
-            background-color: #1E1C1A;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.5s var(--ease-out-expo);
-        }
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* --- CINEMATIC SLIDESHOW (Fixed Smooth Transition) --- */
-        .slide-img {
-            opacity: 0;
-            transform: scale(1);
-            /* Smooth fade + Ken Burns zoom */
-            transition: opacity 1.5s ease-in-out, transform 10s linear;
-            will-change: opacity, transform;
-        }
-        
-        .slide-img.active-slide {
-            opacity: 1;
-            transform: scale(1.08);
-        }
-        
-        .slide-img.inactive-slide {
-            opacity: 0;
-            transform: scale(1);
-            /* Όταν η εικόνα εξαφανίζεται, το zoom επανέρχεται ακαριαία (0s) ενώ είναι αόρατη */
-            transition: opacity 1.5s ease-in-out, transform 0s;
-        }
-
-        /* --- SCROLL REVEAL & BLUR --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            filter: blur(8px);
-            transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo), filter 1s var(--ease-out-expo);
-            will-change: opacity, transform, filter;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-        
-        .reveal-delay-1 { transition-delay: 0.15s; }
-        .reveal-delay-2 { transition-delay: 0.3s; }
-        .reveal-delay-3 { transition-delay: 0.45s; }
-
-        /* --- 3D TILT CARDS --- */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo), border-color 0.5s var(--ease-out-expo);
-            will-change: transform;
-        }
-        
-        .tilt-card:hover {
-            box-shadow: 0 25px 50px -12px rgba(30, 28, 26, 0.15);
-            border-color: #A6A095;
-        }
-
-        /* Glare effect for tilt cards */
-        .tilt-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 10;
-            mix-blend-mode: overlay;
-        }
-        .tilt-card:hover::before { opacity: 1; }
-
-        /* Typewriter Cursor */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .typewriter-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background-color: white;
-            margin-left: 6px;
-            vertical-align: bottom;
-            animation: blink 0.9s step-end infinite;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
-        }
-
-        /* Micro-animations for icons */
-        .icon-phone:hover svg { animation: ring 0.5s ease-in-out; }
-        @keyframes ring {
-            0% { transform: rotate(0); }
-            25% { transform: rotate(15deg); }
-            50% { transform: rotate(-10deg); }
-            75% { transform: rotate(5deg); }
-            100% { transform: rotate(0); }
-        }
-
-        .icon-float svg { transition: transform 0.5s var(--ease-out-expo); }
-        .icon-float:hover svg { transform: translateY(-3px) scale(1.1); }
-    </style>
+/* Links, stars, misc */
+.nl,.lk{position:relative;--b:0px}.lk{--b:4px}
+.nl::after,.lk::after{content:'';position:absolute;left:0;right:0;bottom:var(--b);height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ex)}
+@media(hover:hover){.nl:hover::after,.lk:hover::after{transform:scaleX(1);transform-origin:left}}
+.st{display:flex;gap:5px;margin-bottom:20px}
+.st svg{width:14px;height:14px;fill:#1E1C1A;opacity:0;transform:scale(.4) rotate(-30deg);transition:opacity .7s var(--ex),transform .9s var(--ex)}
+.st svg.o{fill:none;stroke:#A6A095;stroke-width:1.1}
+.in .st svg{opacity:1;transform:none}
+.st svg:nth-child(1){transition-delay:.45s}.st svg:nth-child(2){transition-delay:.55s}.st svg:nth-child(3){transition-delay:.65s}.st svg:nth-child(4){transition-delay:.75s}.st svg:nth-child(5){transition-delay:.85s}
+.wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate}
+@keyframes dr{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+.mp iframe{filter:grayscale(.35) sepia(.1);transition:filter 1s}
+@media(hover:hover){.mp:hover iframe{filter:none}}
+.icon-phone:hover svg{animation:ring .5s ease-in-out}
+@keyframes ring{25%{transform:rotate(15deg)}50%{transform:rotate(-10deg)}75%{transform:rotate(5deg)}}
+.icon-float svg{transition:transform .5s var(--ex)}.icon-float:hover svg{transform:translateY(-3px) scale(1.1)}
+#ts{position:fixed;right:24px;bottom:max(24px,env(safe-area-inset-bottom));z-index:60;visibility:hidden;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ex),transform .5s var(--ex),visibility 0s .5s}
+#ts.show{visibility:visible;opacity:1;transform:none;transition-delay:0s}
+@media(max-width:640px){#ts{left:16px;right:16px}}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+.s.on,.s.pv{animation:none!important}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-ink selection:text-beige relative">
+<body class="relative">
 
-    <!-- TOP ANNOUNCEMENT -->
-    <aside class="w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-soft relative z-50">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <div class="flex items-center gap-3">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-600 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-700 shadow-[0_0_8px_rgba(4,120,87,0.6)]"></span>
-                </span>
-                <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
-            </div>
-        </div>
-    </aside>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="s" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></symbol>
+<symbol id="ph" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></symbol>
+</svg>
 
-    <!-- HEADER -->
-    <header id="main-header" class="sticky top-0 z-40 bg-beige/95 hairline-b py-5 px-6 md:px-12 transition-all duration-500 var(--ease-out-expo)">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            
-            <a href="#" class="group flex items-center gap-3">
-                <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-10 w-auto object-contain transition-transform duration-700 var(--ease-out-expo) group-hover:scale-110 group-hover:rotate-3" width="40" height="40">
-                <div>
-                    <div class="text-lg md:text-xl uppercase tracking-[0.25em] text-ink font-normal">
-                        MORRISON
-                    </div>
-                    <div class="text-[9px] uppercase tracking-[0.3em] text-ink-muted mt-0.5 group-hover:text-ink-soft transition-colors">
-                        The Premium Rooftop — Pylaia
-                    </div>
-                </div>
-            </a>
+<!-- INTRO -->
+<div id="ld" aria-hidden="true"><img src="morrisonlogo.jpg" alt=""><b>Morrison</b><i></i></div>
 
-            <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.18em] text-ink-soft">
-                <a href="#about" class="nav-link hover:text-ink transition-colors">Χωρος</a>
-                <a href="#menu" class="nav-link hover:text-ink transition-colors">Καταλογος</a>
-                <a href="#reviews" class="nav-link hover:text-ink transition-colors">Αξιολογησεις</a>
-                <a href="#contact" class="nav-link hover:text-ink transition-colors">Προσβαση</a>
-            </nav>
+<!-- TOP ANNOUNCEMENT -->
+<aside class="relative z-10 w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-soft">
+  <div class="max-w-7xl mx-auto flex items-center gap-3">
+    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-600 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-700"></span></span>
+    <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
+  </div>
+</aside>
 
-            <div class="flex items-center gap-4">
-                <a href="tel:2316020535" class="icon-phone hidden sm:flex items-center gap-2 text-xs uppercase tracking-widest text-ink-muted hover:text-ink transition-colors group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    231 602 0535
-                </a>
+<!-- HEADER -->
+<header id="hd" class="sticky top-0 z-50 bg-beige/95 hairline-b py-5 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="#" class="group flex items-center gap-3">
+      <img src="morrisonlogo.jpg" alt="Morrison Logo" class="lg h-10 w-auto object-contain transition-transform duration-700 group-hover:scale-105" width="40" height="40">
+      <div>
+        <div class="text-lg md:text-xl uppercase tracking-[0.25em] text-ink font-normal">MORRISON</div>
+        <div class="text-[9px] uppercase tracking-[0.3em] text-ink-muted mt-0.5">The Premium Rooftop — Pylaia</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.18em] text-ink-soft">
+      <a href="#about" class="nl hover:text-ink transition-colors">Χωρος</a>
+      <a href="#menu" class="nl hover:text-ink transition-colors">Καταλογος</a>
+      <a href="#reviews" class="nl hover:text-ink transition-colors">Αξιολογησεις</a>
+      <a href="#contact" class="nl hover:text-ink transition-colors">Προσβαση</a>
+    </nav>
+    <div class="flex items-center gap-5">
+      <a href="tel:2316020535" class="icon-phone hidden sm:flex items-center gap-2 text-xs uppercase tracking-widest text-ink-muted hover:text-ink transition-colors">
+        <svg class="w-4 h-4"><use href="#ph"/></svg>231 602 0535
+      </a>
+      <button id="bg" class="burger md:hidden" aria-label="Μενού" aria-expanded="false" aria-controls="mn"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+  <i id="bar" class="absolute left-0 w-full h-px bg-ink" style="bottom:-1px;transform:scaleX(0);transform-origin:left"></i>
+</header>
 
-                <button onclick="toggleMobileNav()" aria-label="Menu" class="md:hidden text-xs uppercase tracking-widest text-ink px-4 py-2 hairline-all btn-outline">
-                    Menu
-                </button>
-            </div>
-        </div>
+<!-- MOBILE MENU -->
+<div id="mn" aria-hidden="true" class="md:hidden fixed inset-0 z-[45] bg-beige px-6 pt-36 pb-10 flex flex-col justify-between overflow-y-auto">
+  <nav class="flex flex-col">
+    <a href="#about" class="ml py-5 text-[15px] uppercase tracking-[0.2em] text-ink" style="--i:0"><span>Ο Χωρος &amp; η Θεα</span></a>
+    <a href="#menu" class="ml py-5 text-[15px] uppercase tracking-[0.2em] text-ink" style="--i:1"><span>Καταλογος Εδεσματων</span></a>
+    <a href="#reviews" class="ml py-5 text-[15px] uppercase tracking-[0.2em] text-ink" style="--i:2"><span>Κριτικες Επισκεπτων</span></a>
+    <a href="#contact" class="ml py-5 text-[15px] uppercase tracking-[0.2em] text-ink" style="--i:3"><span>Τοποθεσια &amp; Parking</span></a>
+  </nav>
+  <a href="tel:2316020535" class="ml py-5 text-xs uppercase tracking-[0.2em] text-ink" style="--i:4"><span class="flex items-center gap-3"><svg class="w-4 h-4"><use href="#ph"/></svg>Τηλ. 231 602 0535</span></a>
+</div>
 
-        <!-- Mobile Drawer -->
-        <div id="mobile-nav" class="hidden md:hidden pt-4 pb-2 mt-4 hairline-t space-y-1 text-left">
-            <a href="#about" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-3 hover:text-ink hover:pl-2 transition-all duration-300">Ο Χωρος & η Θεα</a>
-            <a href="#menu" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-3 hover:text-ink hover:pl-2 transition-all duration-300">Καταλογος Εδεσματων</a>
-            <a href="#reviews" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-3 hover:text-ink hover:pl-2 transition-all duration-300">Κριτικες Επισκεπτων</a>
-            <a href="#contact" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest text-ink-soft py-3 hover:text-ink hover:pl-2 transition-all duration-300">Τοποθεσια & Parking</a>
-            <div class="pt-4 pb-2 hairline-t text-xs uppercase tracking-widest text-ink flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                Τηλ. 231 602 0535
-            </div>
-        </div>
-    </header>
+<!-- HERO -->
+<section class="relative min-h-[88svh] w-full overflow-hidden flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-12 bg-ink">
+  <div class="absolute inset-0 z-0">
+    <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[70%_center]">
+    <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_65%]">
+    <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_70%]">
+    <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_60%]">
+    <div class="absolute inset-0 z-[3] bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+  </div>
+  <div class="hf absolute inset-3 md:inset-6 border border-white/25 z-10 pointer-events-none"></div>
 
-    <!-- HERO SECTION -->
-    <section class="relative min-h-[85vh] w-full overflow-hidden flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-12 hairline-b">
-        
-        <!-- Background Slideshow -->
-        <div class="absolute inset-0 z-0" id="hero-bg-container">
-            <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[70%_center] active-slide" data-slide="0">
-            <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_65%] inactive-slide" data-slide="1">
-            <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_70%] inactive-slide" data-slide="2">
-            <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_60%] inactive-slide" data-slide="3">
-            
-            <!-- Cinematic Bottom Gradient -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-        </div>
+  <div id="cap" class="max-w-7xl mx-auto w-full relative z-10">
+    <div class="max-w-5xl">
+      <div class="fade flex items-center gap-4 mb-4">
+        <i class="hl hidden sm:block shrink-0"></i>
+        <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/80">Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία</span>
+      </div>
+      <h1 id="hl" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/95 font-normal leading-[1.25]">Η αστική θέα από ψηλά. Καφές, brunch και dining σε καθαρές γραμμές.</h1>
+    </div>
+  </div>
 
-        <!-- Foreground Content -->
-        <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="max-w-3xl">
-                <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/80 block mb-3 drop-shadow-sm opacity-0 animate-[fadeIn_1s_ease-in_forwards_0.5s]">
-                    Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία
-                </span>
-                
-                <!-- Hero Text: Πιο μικρό, 2 σειρές, με απαλή θόλωση (blur) -->
-                <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 font-normal leading-[1.35] mb-0 drop-shadow-2xl min-h-[80px] md:min-h-[100px] filter blur-[0.4px]">
-                    <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor"></span>
-                </h1>
-            </div>
-        </div>
+  <div class="fade absolute bottom-9 right-7 md:right-14 flex z-20">
+    <button class="dt" aria-label="Slide 1"></button><button class="dt" aria-label="Slide 2"></button><button class="dt" aria-label="Slide 3"></button><button class="dt" aria-label="Slide 4"></button>
+  </div>
+  <i class="sc hidden md:block"></i>
+</section>
 
-        <!-- Navigation Dots -->
-        <div class="absolute bottom-8 right-8 md:right-12 flex gap-3 z-20">
-            <button onclick="setSlide(0)" aria-label="Slide 1" class="slide-dot w-3 h-3 rounded-full bg-white opacity-100 transition-all duration-500 hover:scale-150 shadow-[0_0_10px_rgba(255,255,255,0.5)]"></button>
-            <button onclick="setSlide(1)" aria-label="Slide 2" class="slide-dot w-3 h-3 rounded-full bg-white opacity-40 hover:opacity-100 transition-all duration-500 hover:scale-150"></button>
-            <button onclick="setSlide(2)" aria-label="Slide 3" class="slide-dot w-3 h-3 rounded-full bg-white opacity-40 hover:opacity-100 transition-all duration-500 hover:scale-150"></button>
-            <button onclick="setSlide(3)" aria-label="Slide 4" class="slide-dot w-3 h-3 rounded-full bg-white opacity-40 hover:opacity-100 transition-all duration-500 hover:scale-150"></button>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section id="about" class="relative py-24 md:py-28 px-6 md:px-12 bg-beige-tint overflow-hidden scroll-mt-24">
+  <i class="sl ln"></i>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-0">
+    <div class="md:col-span-4 md:pr-10">
+      <span class="rv text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Σημειωμα Χωρου</span>
+      <h2 class="mk text-2xl md:text-3xl uppercase tracking-wider text-ink font-normal leading-snug" style="--d:.1s">Ηρεμια, οριζοντας <br>και συνεπεια.</h2>
+    </div>
+    <div class="md:col-span-8 relative md:pl-14 space-y-8 text-sm text-ink-soft leading-[1.9] max-w-2xl md:max-w-none">
+      <i class="lv hidden md:block absolute left-0 top-0 w-px h-full bg-beige-border"></i>
+      <p class="rv" style="--d:.15s">Μακριά από τη φασαρία του κέντρου αλλά με άμεση πρόσβαση από τον Περιφερειακό, το rooftop του Morrison διαμορφώθηκε για να προσφέρει έναν ευρύχωρο και τακτοποιημένο προορισμό. Ο χώρος παραμένει φωτεινός τις πρωινές ώρες για καφέ και brunch, ενώ καθώς δύει ο ήλιος μετατρέπεται σε ένα ατμοσφαιρικό σημείο συνάντησης για φαγητό και ποτό.</p>
+      <p class="rv" style="--d:.3s">Ο σχεδιασμός του χώρου ακολουθεί καθαρές γραμμές: τραπέζια στην περιφέρεια με ανεμπόδιστη θέα στο ηλιοβασίλεμα, επιμελημένα τραπέζια φαγητού αφιερωμένα στις premium κοπές και τα φρέσκα ζυμαρικά, και ένα κεντρικό bar ως σημείο αναφοράς για cocktails και επιλεγμένη λίστα κρασιών.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- SECTION: THE VENUE & PERSPECTIVE -->
-    <section id="about" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-                
-                <div class="md:col-span-4 reveal">
-                    <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Σημειωμα Χωρου</span>
-                    <h2 class="text-2xl md:text-3xl uppercase tracking-wider text-ink font-normal leading-snug">
-                        Ηρεμια, οριζοντας <br>και συνεπεια.
-                    </h2>
-                </div>
+<!-- MENU -->
+<section id="menu" class="relative py-24 md:py-32 px-6 md:px-12 overflow-hidden scroll-mt-24">
+  <i class="sl ln"></i>
+  <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center overflow-hidden" aria-hidden="true"><span class="wm text-[15rem] md:text-[25rem] uppercase font-bold tracking-tighter text-ink whitespace-nowrap select-none">MORRISON</span></div>
+  <div class="relative z-10 max-w-2xl mx-auto rv">
+    <div class="fr text-center px-8 py-16 md:py-20">
+      <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Καταλογος Εδεσματων &amp; Ποτων</span>
+      <h2 class="mk text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal" style="--d:.1s">Coming Soon!</h2>
+      <div class="flex items-center justify-center gap-3 my-7">
+        <i class="ln r block h-px w-14 bg-ink-faint" style="--d:.3s"></i><i class="block w-1.5 h-1.5 rotate-45 border border-ink"></i><i class="ln block h-px w-14 bg-ink-faint" style="--d:.3s"></i>
+      </div>
+      <p class="text-sm text-ink-soft max-w-md mx-auto leading-relaxed">Ο κατάλογος μας ανανεώνεται. Σύντομα θα είναι διαθέσιμος.</p>
+    </div>
+  </div>
+</section>
 
-                <div class="md:col-span-8 space-y-8 text-sm text-ink-soft leading-relaxed">
-                    <p class="reveal reveal-delay-1">
-                        Μακριά από τη φασαρία του κέντρου αλλά με άμεση πρόσβαση από τον Περιφερειακό, το rooftop του Morrison διαμορφώθηκε για να προσφέρει έναν ευρύχωρο και τακτοποιημένο προορισμό. Ο χώρος παραμένει φωτεινός τις πρωινές ώρες για καφέ και brunch, ενώ καθώς δύει ο ήλιος μετατρέπεται σε ένα ατμοσφαιρικό σημείο συνάντησης για φαγητό και ποτό.
-                    </p>
-                    <p class="reveal reveal-delay-2">
-                        Ο σχεδιασμός του χώρου ακολουθεί καθαρές γραμμές: τραπέζια στην περιφέρεια με ανεμπόδιστη θέα στο ηλιοβασίλεμα, επιμελημένα τραπέζια φαγητού αφιερωμένα στις premium κοπές και τα φρέσκα ζυμαρικά, και ένα κεντρικό bar ως σημείο αναφοράς για cocktails και επιλεγμένη λίστα κρασιών.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: MENU -->
-    <section id="menu" class="py-24 px-6 md:px-12 hairline-b relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center overflow-hidden">
-            <span class="text-[15rem] md:text-[25rem] uppercase font-bold tracking-tighter text-ink whitespace-nowrap select-none">MORRISON</span>
-        </div>
-
-        <div class="max-w-7xl mx-auto text-center relative z-10 reveal">
-            <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Καταλογος Εδεσματων & Ποτων</span>
-            <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal mb-4">Coming Soon!</h2>
-            <div class="w-12 h-px bg-ink mx-auto mb-6"></div>
-            <p class="text-sm text-ink-soft max-w-md mx-auto">Ο κατάλογος μας ανανεώνεται. Σύντομα θα είναι διαθέσιμος.</p>
-        </div>
-    </section>
-
-    <!-- SECTION: REVIEWS -->
-    <section id="reviews" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
-                <div>
-                    <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Αυθεντικες Εντυπωσεις Επισκεπτων</span>
-                    <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">Δειγματα Κριτικων</h2>
-                </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Morrison+The+Premium+Rooftop+Pylaia" 
-                   target="_blank" rel="noopener noreferrer" 
-                   class="btn-premium group inline-flex items-center justify-center gap-2 px-8 py-4 text-beige text-xs uppercase tracking-[0.16em] rounded-sm">
-                    Live Κριτικες στο Google Maps
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Review 1 (3D Tilt) -->
-                <div class="tilt-card relative p-7 bg-beige hairline-all flex flex-col justify-between rounded-md overflow-hidden reveal reveal-delay-1" onmousemove="tiltCard(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="relative z-10">
-                        <div class="flex gap-1 mb-4 text-ink">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
-                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
-                            «Απόλυτο highlight στη Θεσσαλονίκη! Το Morison Bar προσφέρει υπέροχη θέα στο κέντρο, εύκολο πάρκινγκ και έναν χώρο που είναι πάντα πεντακάθαρος, πανέμορφος και πραγματικά προσεγμένος. Το service είναι εξαιρετικό, με προσωπικό που ξέρει τη δουλειά του.»
-                        </p>
-                    </div>
-                    <div class="relative z-10 pt-4 hairline-t text-xs flex justify-between items-end">
-                        <div>
-                            <span class="text-ink uppercase block font-normal">Γιωργος Πλοχωριδης</span>
-                            <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 123 κριτικές</span>
-                        </div>
-                        <svg class="w-5 h-5 text-ink-faint opacity-50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                    </div>
-                </div>
-
-                <!-- Review 2 (3D Tilt) -->
-                <div class="tilt-card relative p-7 bg-beige hairline-all flex flex-col justify-between rounded-md overflow-hidden reveal reveal-delay-2" onmousemove="tiltCard(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="relative z-10">
-                        <div class="flex gap-1 mb-4 text-ink">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
-                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
-                            «Τα φαγητά ήταν εξαιρετικά και ωραία μαγειρεμένα. Το σέρβις πολύ ευγενικό και η ατμόσφαιρα ωραία... Μία από τις πιο σταθερές επιλογές για καλό φαγητό και θέα στην ανατολική πλευρά της πόλης.»
-                        </p>
-                    </div>
-                    <div class="relative z-10 pt-4 hairline-t text-xs flex justify-between items-end">
-                        <div>
-                            <span class="text-ink uppercase block font-normal">Andro Konsta</span>
-                            <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 37 κριτικές</span>
-                        </div>
-                        <svg class="w-5 h-5 text-ink-faint opacity-50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                    </div>
-                </div>
-
-                <!-- Review 3 (3D Tilt) -->
-                <div class="tilt-card relative p-7 bg-beige hairline-all flex flex-col justify-between rounded-md overflow-hidden reveal reveal-delay-3" onmousemove="tiltCard(event, this)" onmouseleave="resetTilt(this)">
-                    <div class="relative z-10">
-                        <div class="flex gap-1 mb-4 text-ink">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-4 h-4 text-ink-faint" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                        </div>
-                        <p class="text-xs text-ink-soft leading-relaxed mb-6 font-normal">
-                            «Η εξυπηρέτηση από την κοπέλα ήταν άψογη εξού και τα 4 αστέρια! Μεγάλες μερίδες γενικά που είναι πολύ θετικό, η σαλάτα ήταν τοπ και η θέα πραγματικά πολύ ωραία!»
-                        </p>
-                    </div>
-                    <div class="relative z-10 pt-4 hairline-t text-xs flex justify-between items-end">
-                        <div>
-                            <span class="text-ink uppercase block font-normal">Vaso Psomadaki</span>
-                            <span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 195 κριτικές</span>
-                        </div>
-                        <svg class="w-5 h-5 text-ink-faint opacity-50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- SECTION: LOCATION -->
-    <section id="contact" class="py-20 px-6 md:px-12 hairline-b">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                
-                <div class="lg:col-span-6 space-y-8 reveal">
-                    <div>
-                        <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-2">Προσβαση & Στοιχεια</span>
-                        <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">17ης Νοεμβριου 87</h2>
-                        <p class="text-xs uppercase tracking-widest text-ink-muted mt-1">Πυλαια 555 35, Θεσσαλονικη — JX5X+7F</p>
-                    </div>
-
-                    <div class="p-6 hairline-all bg-beige-tint space-y-1 relative group hover:border-ink transition-all duration-500 rounded-sm">
-                        <span class="text-[10px] uppercase tracking-widest text-ink-muted block mb-2">Τηλεφωνικη Επικοινωνια</span>
-                        <div class="flex items-center justify-between">
-                            <a href="tel:2316020535" class="text-ink uppercase text-lg font-normal hover:underline decoration-1 underline-offset-4 flex items-center gap-3 icon-float">
-                                <svg class="w-5 h-5 text-ink-muted group-hover:text-ink transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                                231 602 0535
-                            </a>
-                            <button onclick="copyToClipboard('2316020535', 'Αντιγράφηκε το τηλέφωνο')" class="icon-float text-[10px] uppercase tracking-wider text-ink-muted hover:text-ink flex items-center gap-1.5 transition-colors touch-manipulation">
-                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
-                                [Αντιγραφη]
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Morrison+The+Premium+Rooftop+Pylaia" target="_blank" rel="noopener noreferrer" class="btn-premium group inline-flex items-center gap-3 px-8 py-4 text-beige text-xs uppercase tracking-widest rounded-sm">
-                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            Οδηγιες στο Google Maps
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-6 hairline-all p-3 bg-beige flex flex-col reveal reveal-delay-1 group rounded-sm overflow-hidden">
-                    <div class="relative w-full flex-1 min-h-[320px] lg:min-h-[380px] overflow-hidden">
-                        <iframe 
-                            title="Morrison Rooftop Location Map"
-                            src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&z=16&output=embed"
-                            class="absolute inset-0 w-full h-full border-0 transition-all duration-700" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <div class="pt-3 flex items-center justify-between text-[11px] uppercase tracking-widest text-ink-muted">
-                        <span>17ης Νοεμβρίου 87, Πυλαία</span>
-                        <span>Τηλ: 231 602 0535</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-beige-muted py-12 px-6 md:px-12 text-xs">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-8 w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500" width="32" height="32">
-                <div>
-                    <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
-                    <span class="text-[10px] uppercase tracking-widest text-ink-soft block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap gap-6 uppercase tracking-wider text-[11px] text-ink-soft">
-                <a href="#about" class="nav-link hover:text-ink transition-colors">Χωρος</a>
-                <a href="#menu" class="nav-link hover:text-ink transition-colors">Καταλογος</a>
-                <a href="#reviews" class="nav-link hover:text-ink transition-colors">Αξιολογησεις</a>
-                <a href="#contact" class="nav-link hover:text-ink transition-colors">Προσβαση</a>
-            </div>
-
-            <div class="text-[10px] uppercase tracking-widest text-ink-soft">
-                © Morrison Rooftop. Όλα τα δικαιώματα διατηρούνται.
-            </div>
-        </div>
-    </footer>
-
-    <!-- TOAST BANNER -->
-    <div id="status-toast" class="fixed bottom-6 right-6 z-50 hidden bg-beige hairline-all p-4 shadow-2xl max-w-sm text-xs transform translate-y-8 opacity-0 transition-all duration-500 var(--ease-out-expo)">
-        <div class="flex items-start justify-between gap-4">
-            <div>
-                <span class="text-ink font-normal uppercase block mb-0.5" id="toast-title">Ενημερωση</span>
-                <span class="text-ink-soft text-[11px] block" id="toast-desc">Το αίτημα καταχωρήθηκε.</span>
-            </div>
-            <button onclick="hideToast()" class="text-ink-muted hover:text-ink text-[10px] uppercase p-1 touch-manipulation">[OK]</button>
-        </div>
+<!-- REVIEWS -->
+<section id="reviews" class="relative py-24 md:py-28 px-6 md:px-12 bg-beige-tint scroll-mt-24">
+  <i class="sl ln"></i>
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+      <div>
+        <span class="rv text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Αυθεντικες Εντυπωσεις Επισκεπτων</span>
+        <h2 class="mk text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal" style="--d:.1s">Δειγματα Κριτικων</h2>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Morrison+The+Premium+Rooftop+Pylaia" target="_blank" rel="noopener noreferrer" class="btn">Live Κριτικες στο Google Maps<i class="arw"></i></a>
     </div>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        function toggleMobileNav() {
-            document.getElementById('mobile-nav').classList.toggle('hidden');
-        }
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <div class="rv" style="--d:.1s">
+        <article class="fr bg-beige p-8 h-full flex flex-col justify-between">
+          <div>
+            <div class="st"><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg></div>
+            <p class="text-[13px] text-ink-soft leading-[1.85] mb-8">«Απόλυτο highlight στη Θεσσαλονίκη! Το Morison Bar προσφέρει υπέροχη θέα στο κέντρο, εύκολο πάρκινγκ και έναν χώρο που είναι πάντα πεντακάθαρος, πανέμορφος και πραγματικά προσεγμένος. Το service είναι εξαιρετικό, με προσωπικό που ξέρει τη δουλειά του.»</p>
+          </div>
+          <div class="pt-4 hairline-t text-xs flex justify-between items-end">
+            <div><span class="text-ink uppercase block">Γιωργος Πλοχωριδης</span><span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 123 κριτικές</span></div>
+            <i class="block w-1.5 h-1.5 rotate-45 border border-ink-faint mb-1"></i>
+          </div>
+        </article>
+      </div>
 
-        function copyToClipboard(text, message) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => showNotice('Αντιγραφηκε', message));
-            } else {
-                const temp = document.createElement('textarea');
-                temp.value = text;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-                showNotice('Αντιγραφηκε', message);
-            }
-        }
+      <div class="rv" style="--d:.25s">
+        <article class="fr bg-beige p-8 h-full flex flex-col justify-between">
+          <div>
+            <div class="st"><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg></div>
+            <p class="text-[13px] text-ink-soft leading-[1.85] mb-8">«Τα φαγητά ήταν εξαιρετικά και ωραία μαγειρεμένα. Το σέρβις πολύ ευγενικό και η ατμόσφαιρα ωραία... Μία από τις πιο σταθερές επιλογές για καλό φαγητό και θέα στην ανατολική πλευρά της πόλης.»</p>
+          </div>
+          <div class="pt-4 hairline-t text-xs flex justify-between items-end">
+            <div><span class="text-ink uppercase block">Andro Konsta</span><span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 37 κριτικές</span></div>
+            <i class="block w-1.5 h-1.5 rotate-45 border border-ink-faint mb-1"></i>
+          </div>
+        </article>
+      </div>
 
-        function showNotice(title, desc) {
-            const toast = document.getElementById('status-toast');
-            document.getElementById('toast-title').textContent = title;
-            document.getElementById('toast-desc').textContent = desc;
-            
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.remove('translate-y-8', 'opacity-0');
-                toast.classList.add('translate-y-0', 'opacity-100');
-            }, 10);
-            setTimeout(hideToast, 4000);
-        }
+      <div class="rv" style="--d:.4s">
+        <article class="fr bg-beige p-8 h-full flex flex-col justify-between">
+          <div>
+            <div class="st"><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg><use href="#s"/></svg><svg class="o"><use href="#s"/></svg></div>
+            <p class="text-[13px] text-ink-soft leading-[1.85] mb-8">«Η εξυπηρέτηση από την κοπέλα ήταν άψογη εξού και τα 4 αστέρια! Μεγάλες μερίδες γενικά που είναι πολύ θετικό, η σαλάτα ήταν τοπ και η θέα πραγματικά πολύ ωραία!»</p>
+          </div>
+          <div class="pt-4 hairline-t text-xs flex justify-between items-end">
+            <div><span class="text-ink uppercase block">Vaso Psomadaki</span><span class="text-[10px] text-ink-muted">Τοπικός οδηγός • 195 κριτικές</span></div>
+            <i class="block w-1.5 h-1.5 rotate-45 border border-ink-faint mb-1"></i>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function hideToast() {
-            const toast = document.getElementById('status-toast');
-            toast.classList.remove('translate-y-0', 'opacity-100');
-            toast.classList.add('translate-y-8', 'opacity-0');
-            setTimeout(() => toast.classList.add('hidden'), 500);
-        }
+<!-- CONTACT -->
+<section id="contact" class="relative py-24 md:py-28 px-6 md:px-12 scroll-mt-24">
+  <i class="sl ln"></i>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-6 space-y-8 rv">
+      <div>
+        <span class="text-[10px] uppercase tracking-[0.25em] text-ink-muted block mb-3">Προσβαση &amp; Στοιχεια</span>
+        <h2 class="text-2xl md:text-4xl uppercase tracking-wider text-ink font-normal">17ης Νοεμβριου 87</h2>
+        <p class="text-xs uppercase tracking-widest text-ink-muted mt-2">Πυλαια 555 35, Θεσσαλονικη — JX5X+7F</p>
+      </div>
 
-        // 3D TILT EFFECT
-        function tiltCard(e, card) {
-            if(window.innerWidth < 768) return; // Disable on mobile for performance
-            
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -6; // Max 6 degrees
-            const rotateY = ((x - centerX) / centerX) * 6;
+      <div class="fr bg-beige-tint p-7">
+        <span class="text-[10px] uppercase tracking-widest text-ink-muted block mb-3">Τηλεφωνικη Επικοινωνια</span>
+        <div class="flex items-center justify-between gap-4">
+          <a href="tel:2316020535" class="icon-float text-ink text-lg flex items-center gap-3"><svg class="w-5 h-5 text-ink-muted"><use href="#ph"/></svg>231 602 0535</a>
+          <button onclick="cp('2316020535','Αντιγράφηκε το τηλέφωνο')" class="lk text-[10px] uppercase tracking-wider text-ink-muted hover:text-ink flex items-center gap-1.5 py-2 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+            [Αντιγραφη]
+          </button>
+        </div>
+      </div>
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            
-            // Move glare
-            card.style.setProperty('--glare-x', `${x}px`);
-            card.style.setProperty('--glare-y', `${y}px`);
-        }
+      <div class="pt-2">
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Morrison+The+Premium+Rooftop+Pylaia" target="_blank" rel="noopener noreferrer" class="btn">Οδηγιες στο Google Maps<i class="arw"></i></a>
+      </div>
+    </div>
 
-        function resetTilt(card) {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        }
+    <div class="lg:col-span-6 rv" style="--d:.15s">
+      <div class="fr bg-beige p-3 flex flex-col h-full">
+        <div class="mp mk relative w-full flex-1 min-h-[320px] lg:min-h-[380px] overflow-hidden" style="--d:.2s">
+          <iframe title="Morrison Rooftop Location Map" src="https://maps.google.com/maps?q=Morrison%20The%20Premium%20Rooftop%2C%2017is%20Noemvriou%2087%2C%20Pylaia&z=16&output=embed" class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="pt-3 flex flex-wrap items-center justify-between gap-x-4 text-[11px] uppercase tracking-widest text-ink-muted">
+          <span>17ης Νοεμβρίου 87, Πυλαία</span><span>Τηλ: 231 602 0535</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // INITIALIZATION
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // Typewriter (2 Γραμμές)
-            const heading = document.getElementById('typewriter-text');
-            const cursor = document.getElementById('typewriter-cursor');
-            const text = "Η αστική θέα από ψηλά.\nΚαφές, brunch & dining.";
-            let i = 0;
-            function type() {
-                if (i < text.length) {
-                    heading.innerHTML = text.substring(0, i + 1).replace(/\n/g, '<br>');
-                    i++;
-                    setTimeout(type, 60); // Λίγο πιο αργό για premium αίσθηση
-                } else {
-                    cursor.style.display = 'none';
-                }
-            }
-            setTimeout(type, 600);
+<!-- FOOTER -->
+<footer class="relative bg-beige-muted py-12 px-6 md:px-12 text-xs">
+  <i class="sl ln"></i>
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <div class="flex items-center gap-3">
+      <img src="morrisonlogo.jpg" alt="Morrison Logo" class="h-8 w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500" width="32" height="32">
+      <div>
+        <span class="text-sm uppercase tracking-[0.25em] text-ink block font-normal">MORRISON</span>
+        <span class="text-[10px] uppercase tracking-widest text-ink-soft block mt-1">The Premium Rooftop — 17ης Νοεμβριου 87, Πυλαια</span>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-x-6 gap-y-3 uppercase tracking-wider text-[11px] text-ink-soft">
+      <a href="#about" class="nl hover:text-ink transition-colors">Χωρος</a>
+      <a href="#menu" class="nl hover:text-ink transition-colors">Καταλογος</a>
+      <a href="#reviews" class="nl hover:text-ink transition-colors">Αξιολογησεις</a>
+      <a href="#contact" class="nl hover:text-ink transition-colors">Προσβαση</a>
+    </div>
+    <div class="text-[10px] uppercase tracking-widest text-ink-soft">© Morrison Rooftop. Όλα τα δικαιώματα διατηρούνται.</div>
+  </div>
+</footer>
 
-            // Slideshow (Fixed Snapping via CSS Classes)
-            let currentSlideIndex = 0;
-            const slides = document.querySelectorAll('[data-slide]');
-            const dots = document.querySelectorAll('.slide-dot');
-            let slideInterval;
+<!-- TOAST -->
+<div id="ts" class="bg-beige hairline-t border border-beige-border p-4 shadow-2xl max-w-sm text-xs" role="status">
+  <div class="flex items-start justify-between gap-4">
+    <div><span class="text-ink uppercase block mb-0.5">Αντιγραφηκε</span><span id="td" class="text-ink-soft text-[11px] block"></span></div>
+    <button onclick="this.closest('#ts').classList.remove('show')" class="text-ink-muted hover:text-ink text-[10px] uppercase p-1">[OK]</button>
+  </div>
+</div>
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    if (i === index) {
-                        slide.classList.remove('inactive-slide');
-                        slide.classList.add('active-slide');
-                    } else {
-                        slide.classList.remove('active-slide');
-                        slide.classList.add('inactive-slide');
-                    }
-                });
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('opacity-100', i === index);
-                    dot.classList.toggle('opacity-40', i !== index);
-                });
-                currentSlideIndex = index;
-            }
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-            window.setSlide = (index) => {
-                clearInterval(slideInterval);
-                showSlide(index);
-                slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 6000);
-            }
+// Scroll reveals
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+$$('.rv,.mk,.ln,.lv').forEach(el=>io.observe(el));
 
-            slideInterval = setInterval(() => showSlide((currentSlideIndex + 1) % slides.length), 6000);
+// Hero headline: word-by-word mask reveal
+const h=$('#hl'),words=h.textContent.trim().split(' ');
+h.textContent='';
+words.forEach((t,i)=>{const a=document.createElement('span'),b=document.createElement('span');a.className='w';b.style.setProperty('--i',i);b.textContent=t;a.append(b);h.append(a,' ')});
 
-            // Scroll Reveal
-            const revealOnScroll = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+// Hero slideshow
+const S=$$('.s'),D=$$('.dt');let c=-1,tm;
+function go(n){
+  if(n===c)return;
+  S.forEach((s,i)=>{if(i!==c)s.classList.remove('pv','on')});
+  if(c>=0){S[c].classList.remove('on');S[c].classList.add('pv')}
+  void S[n].offsetWidth;
+  S[n].classList.add('on');
+  D.forEach((d,i)=>{d.classList.remove('on');if(i===n){void d.offsetWidth;d.classList.add('on')}});
+  c=n;clearTimeout(tm);tm=setTimeout(()=>go((n+1)%S.length),7000);
+}
+D.forEach((d,i)=>d.onclick=()=>go(i));
+setTimeout(()=>go(0),rm?0:1900);
 
-            document.querySelectorAll('.reveal').forEach(el => revealOnScroll.observe(el));
+// Mobile menu
+const B=$('#bg'),M=$('#mn');
+function tog(f){const o=typeof f==='boolean'?f:!M.classList.contains('open');M.classList.toggle('open',o);B.classList.toggle('open',o);B.setAttribute('aria-expanded',o);M.setAttribute('aria-hidden',!o);document.documentElement.classList.toggle('lock',o)}
+B.onclick=()=>tog();
+$$('#mn a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+addEventListener('keydown',e=>e.key==='Escape'&&tog(false));
+matchMedia('(min-width:768px)').addEventListener('change',e=>e.matches&&tog(false));
 
-            // Header Scroll
-            const header = document.getElementById('main-header');
-            let isScrolled = false;
-            window.addEventListener('scroll', () => {
-                const shouldScroll = window.scrollY > 50;
-                if (shouldScroll !== isScrolled) {
-                    isScrolled = shouldScroll;
-                    header.classList.toggle('header-scrolled', isScrolled);
-                }
-            }, { passive: true });
-        });
-    </script>
+// Scroll: header state, progress line, hero caption drift
+const hd=$('#hd'),bar=$('#bar'),cap=$('#cap');let tk=0;
+function sc(){
+  const y=scrollY,mx=document.documentElement.scrollHeight-innerHeight;
+  hd.classList.toggle('hs',y>50);
+  bar.style.transform='scaleX('+(mx>0?Math.min(1,y/mx):0)+')';
+  if(!rm&&y<innerHeight){cap.style.transform='translateY('+y*.22+'px)';cap.style.opacity=Math.max(0,1-y/(innerHeight*.7))}
+  tk=0;
+}
+addEventListener('scroll',()=>{tk||(tk=requestAnimationFrame(sc))},{passive:true});sc();
+
+// Magnetic buttons (desktop only)
+if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches)$$('.btn').forEach(b=>{
+  b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.12+'px,'+(e.clientY-r.top-r.height/2)*.25+'px)'});
+  b.addEventListener('pointerleave',()=>b.style.transform='');
+});
+
+// Copy phone
+const ts=$('#ts');let tt;
+window.cp=(t,m)=>{
+  const ok=()=>{$('#td').textContent=m;ts.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>ts.classList.remove('show'),4000)};
+  if(navigator.clipboard&&isSecureContext)navigator.clipboard.writeText(t).then(ok);
+  else{const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();document.execCommand('copy');a.remove();ok()}
+};
+})();
+</script>
 </body>
 </html>
