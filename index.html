@@ -183,23 +183,25 @@
             transform-origin: left;
         }
 
-        /* --- SMOOTH SLIDESHOW (No Snapping) --- */
+        /* --- CINEMATIC SLIDESHOW (Fixed Smooth Transition) --- */
         .slide-img {
             opacity: 0;
             transform: scale(1);
-            transition: opacity 1.5s ease-in-out;
+            /* Smooth fade + Ken Burns zoom */
+            transition: opacity 1.5s ease-in-out, transform 10s linear;
             will-change: opacity, transform;
         }
         
         .slide-img.active-slide {
             opacity: 1;
-            /* Χρησιμοποιούμε animation για το zoom, ώστε να μην υπάρχει transition στο transform κατά την αλλαγή */
-            animation: kenBurns 8s linear forwards;
+            transform: scale(1.08);
         }
-
-        @keyframes kenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
+        
+        .slide-img.inactive-slide {
+            opacity: 0;
+            transform: scale(1);
+            /* Όταν η εικόνα εξαφανίζεται, το zoom επανέρχεται ακαριαία (0s) ενώ είναι αόρατη */
+            transition: opacity 1.5s ease-in-out, transform 0s;
         }
 
         /* --- SCROLL REVEAL & BLUR --- */
@@ -347,23 +349,23 @@
         <!-- Background Slideshow -->
         <div class="absolute inset-0 z-0" id="hero-bg-container">
             <img src="morrison1.jpg" alt="Morrison Rooftop View" fetchpriority="high" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[70%_center] active-slide" data-slide="0">
-            <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_65%]" data-slide="1">
-            <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_70%]" data-slide="2">
-            <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_60%]" data-slide="3">
+            <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_65%] inactive-slide" data-slide="1">
+            <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_70%] inactive-slide" data-slide="2">
+            <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="slide-img absolute inset-0 w-full h-full object-cover object-[center_60%] inactive-slide" data-slide="3">
             
             <!-- Cinematic Bottom Gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
         </div>
 
-        <!-- Foreground Content (Caption Bottom-Left) -->
+        <!-- Foreground Content -->
         <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="max-w-5xl"> <!-- Πιο φαρδύ container για λιγότερες σειρές -->
+            <div class="max-w-3xl">
                 <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-white/80 block mb-3 drop-shadow-sm opacity-0 animate-[fadeIn_1s_ease-in_forwards_0.5s]">
                     Τεύχος Τοποθεσίας — 17ης Νοεμβρίου 87, Πυλαία
                 </span>
                 
-                <!-- Λεζάντα: Μεγαλύτερη οριζόντια ανάπτυξη, 1-2 σειρές max -->
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/95 font-normal leading-[1.25] mb-0 drop-shadow-2xl min-h-[60px] md:min-h-[80px] filter blur-[0.3px]">
+                <!-- Hero Text: Πιο μικρό, 2 σειρές, με απαλή θόλωση (blur) -->
+                <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 font-normal leading-[1.35] mb-0 drop-shadow-2xl min-h-[80px] md:min-h-[100px] filter blur-[0.4px]">
                     <span id="typewriter-text"></span><span id="typewriter-cursor" class="typewriter-cursor"></span>
                 </h1>
             </div>
@@ -378,8 +380,8 @@
         </div>
     </section>
 
-    <!-- SECTION: THE VENUE & PERSPECTIVE (Προστέθηκε scroll-mt) -->
-    <section id="about" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint overflow-hidden scroll-mt-24">
+    <!-- SECTION: THE VENUE & PERSPECTIVE -->
+    <section id="about" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
                 
@@ -402,8 +404,8 @@
         </div>
     </section>
 
-    <!-- SECTION: MENU (Προστέθηκε scroll-mt) -->
-    <section id="menu" class="py-24 px-6 md:px-12 hairline-b relative overflow-hidden scroll-mt-24">
+    <!-- SECTION: MENU -->
+    <section id="menu" class="py-24 px-6 md:px-12 hairline-b relative overflow-hidden">
         <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center overflow-hidden">
             <span class="text-[15rem] md:text-[25rem] uppercase font-bold tracking-tighter text-ink whitespace-nowrap select-none">MORRISON</span>
         </div>
@@ -416,8 +418,8 @@
         </div>
     </section>
 
-    <!-- SECTION: REVIEWS (Προστέθηκε scroll-mt) -->
-    <section id="reviews" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint scroll-mt-24">
+    <!-- SECTION: REVIEWS -->
+    <section id="reviews" class="py-20 px-6 md:px-12 hairline-b bg-beige-tint">
         <div class="max-w-7xl mx-auto">
             
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
@@ -509,8 +511,8 @@
         </div>
     </section>
 
-    <!-- SECTION: LOCATION (Προστέθηκε scroll-mt) -->
-    <section id="contact" class="py-20 px-6 md:px-12 hairline-b scroll-mt-24">
+    <!-- SECTION: LOCATION -->
+    <section id="contact" class="py-20 px-6 md:px-12 hairline-b">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
@@ -665,23 +667,23 @@
         // INITIALIZATION
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Typewriter (Πλήρες κείμενο χωρίς <br>)
+            // Typewriter (2 Γραμμές)
             const heading = document.getElementById('typewriter-text');
             const cursor = document.getElementById('typewriter-cursor');
-            const text = "Η αστική θέα από ψηλά. Καφές, brunch και dining σε καθαρές γραμμές.";
+            const text = "Η αστική θέα από ψηλά.\nΚαφές, brunch & dining.";
             let i = 0;
             function type() {
                 if (i < text.length) {
-                    heading.innerHTML = text.substring(0, i + 1);
+                    heading.innerHTML = text.substring(0, i + 1).replace(/\n/g, '<br>');
                     i++;
-                    setTimeout(type, 45); 
+                    setTimeout(type, 60); // Λίγο πιο αργό για premium αίσθηση
                 } else {
                     cursor.style.display = 'none';
                 }
             }
             setTimeout(type, 600);
 
-            // Smooth Slideshow (Fade + Ken Burns)
+            // Slideshow (Fixed Snapping via CSS Classes)
             let currentSlideIndex = 0;
             const slides = document.querySelectorAll('[data-slide]');
             const dots = document.querySelectorAll('.slide-dot');
@@ -690,9 +692,11 @@
             function showSlide(index) {
                 slides.forEach((slide, i) => {
                     if (i === index) {
+                        slide.classList.remove('inactive-slide');
                         slide.classList.add('active-slide');
                     } else {
                         slide.classList.remove('active-slide');
+                        slide.classList.add('inactive-slide');
                     }
                 });
                 dots.forEach((dot, i) => {
