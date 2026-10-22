@@ -34,12 +34,12 @@ html.lock,html.lock body{overflow:hidden}
 @keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes lnk{to{transform:none}}
 
-/* Hero: continuous zoom-in, new slide fades in over the old one which keeps zooming underneath */
-.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transform-origin:50% 55%}
+/* Hero: continuous zoom-in, sharp rendering */
+.s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:0;transform-origin:50% 55%;backface-visibility:hidden;transform:translateZ(0)}
 .s.on,.s.pv{animation:zi 12s linear forwards;will-change:transform}
 .s.pv{opacity:1;z-index:1}
 .s.on{opacity:1;z-index:2;transition:opacity 1.8s ease}
-@keyframes zi{from{transform:scale(1)}to{transform:scale(1.16)}}
+@keyframes zi{from{transform:scale(1) translateZ(0)}to{transform:scale(1.08) translateZ(0)}}
 html:not(.js) .s:first-child{opacity:1}
 .hf{animation:frm 1.8s var(--ex) 2.2s both}
 @keyframes frm{from{opacity:0;transform:scale(1.025)}}
@@ -57,7 +57,7 @@ html:not(.js) .s:first-child{opacity:1}
 .sc::after{content:'';position:absolute;inset:0;background:#fff;transform:translateY(-100%);animation:scd 2.6s var(--io) 3.2s infinite}
 @keyframes scd{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
-/* Scroll reveals: soft rise, curtain mask, drawn lines */
+/* Scroll reveals */
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ex),transform 1.1s var(--ex);transition-delay:var(--d,0s)}
 .js .mk{clip-path:inset(0 -6px 100% -6px);transform:translateY(22px);transition:clip-path 1.2s var(--ex),transform 1.2s var(--ex);transition-delay:var(--d,0s)}
 .js .ln{transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--ex);transition-delay:var(--d,0s)}
@@ -68,7 +68,7 @@ html:not(.js) .s:first-child{opacity:1}
 .js .ln.in{transform:scaleX(1)}.js .lv.in{transform:scaleY(1)}
 .sl{position:absolute;top:0;left:0;right:0;height:1px;background:#D5C8B9}
 
-/* Header, burger, mobile overlay */
+/* Header & Mobile */
 #hd{transition:padding .7s var(--ex),background-color .7s,box-shadow .7s}
 #hd.hs{padding-top:12px;padding-bottom:12px;background-color:rgba(243,235,225,.98);box-shadow:0 14px 30px -18px rgba(30,28,26,.18)}
 #hd .lg{transition:height .7s var(--ex)}#hd.hs .lg{height:34px}
@@ -87,7 +87,7 @@ html:not(.js) .s:first-child{opacity:1}
 .open .ml span{transform:none;transition-delay:calc(.35s + var(--i)*.08s)}
 .open .ml::after{transform:none;transition-delay:calc(.4s + var(--i)*.08s)}
 
-/* Luxury buttons: flat ink, inner hairline frame, fill rises on hover, drawn arrow */
+/* Buttons */
 .btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:16px;padding:19px 34px;background:#1E1C1A;color:#F3EBE1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:transform .5s var(--ex),color .6s var(--ex)}
 .btn::before{content:'';position:absolute;inset:0;background:#E8DDD1;transform:scaleY(0);transform-origin:bottom;transition:transform .7s var(--ex);z-index:-1}
 .btn::after{content:'';position:absolute;inset:4px;border:1px solid rgba(243,235,225,.3);pointer-events:none;transition:inset .6s var(--ex),border-color .6s}
@@ -97,20 +97,22 @@ html:not(.js) .s:first-child{opacity:1}
 .btn:active{opacity:.9}
 @media(max-width:640px){.btn{width:100%;justify-content:center;text-align:center;padding:19px 20px}}
 
-/* Double-frame panels */
+/* Frames & Links */
 .fr{position:relative;border:1px solid #D5C8B9;transition:transform .8s var(--ex),box-shadow .8s var(--ex),border-color .8s}
 .fr::after{content:'';position:absolute;inset:6px;border:1px solid rgba(213,200,185,.6);pointer-events:none;transition:inset .8s var(--ex),border-color .8s}
 @media(hover:hover){.fr:hover{transform:translateY(-6px);box-shadow:0 30px 50px -28px rgba(30,28,26,.3);border-color:#A6A095}.fr:hover::after{inset:10px;border-color:#A6A095}}
 
-/* Links, stars, misc */
 .nl,.lk{position:relative;--b:0px}.lk{--b:4px}
 .nl::after,.lk::after{content:'';position:absolute;left:0;right:0;bottom:var(--b);height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ex)}
 @media(hover:hover){.nl:hover::after,.lk:hover::after{transform:scaleX(1);transform-origin:left}}
+
+/* Review Stars */
 .st{display:flex;gap:5px;margin-bottom:20px}
 .st svg{width:14px;height:14px;fill:#1E1C1A;opacity:0;transform:scale(.4) rotate(-30deg);transition:opacity .7s var(--ex),transform .9s var(--ex)}
 .st svg.o{fill:none;stroke:#A6A095;stroke-width:1.1}
 .in .st svg{opacity:1;transform:none}
 .st svg:nth-child(1){transition-delay:.45s}.st svg:nth-child(2){transition-delay:.55s}.st svg:nth-child(3){transition-delay:.65s}.st svg:nth-child(4){transition-delay:.75s}.st svg:nth-child(5){transition-delay:.85s}
+
 .wm{display:inline-block;animation:dr 40s ease-in-out infinite alternate}
 @keyframes dr{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
 .mp iframe{filter:grayscale(.35) sepia(.1);transition:filter 1s}
@@ -118,6 +120,7 @@ html:not(.js) .s:first-child{opacity:1}
 .icon-phone:hover svg{animation:ring .5s ease-in-out}
 @keyframes ring{25%{transform:rotate(15deg)}50%{transform:rotate(-10deg)}75%{transform:rotate(5deg)}}
 .icon-float svg{transition:transform .5s var(--ex)}.icon-float:hover svg{transform:translateY(-3px) scale(1.1)}
+
 #ts{position:fixed;right:24px;bottom:max(24px,env(safe-area-inset-bottom));z-index:60;visibility:hidden;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ex),transform .5s var(--ex),visibility 0s .5s}
 #ts.show{visibility:visible;opacity:1;transform:none;transition-delay:0s}
 @media(max-width:640px){#ts{left:16px;right:16px}}
@@ -136,15 +139,7 @@ html:not(.js) .s:first-child{opacity:1}
 <!-- INTRO -->
 <div id="ld" aria-hidden="true"><img src="morrisonlogo.jpg" alt=""><b>Morrison</b><i></i></div>
 
-<!-- TOP ANNOUNCEMENT -->
-<aside class="relative z-10 w-full bg-beige-muted hairline-b py-2.5 px-6 md:px-12 text-[11px] uppercase tracking-wider text-ink-soft">
-  <div class="max-w-7xl mx-auto flex items-center gap-3">
-    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-600 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-700"></span></span>
-    <span>17ης Νοεμβριου 87, Πυλαια — Θεσσαλονικη</span>
-  </div>
-</aside>
-
-<!-- HEADER -->
+<!-- HEADER (Removed the top aside bar) -->
 <header id="hd" class="sticky top-0 z-50 bg-beige/95 hairline-b py-5 px-6 md:px-12">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="#" class="group flex items-center gap-3">
@@ -188,7 +183,8 @@ html:not(.js) .s:first-child{opacity:1}
     <img src="morrison2.jpg" alt="Morrison Interior Lounge" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_65%]">
     <img src="morrison3.jpg" alt="Morrison Dining Area" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_70%]">
     <img src="morrison4.jpg" alt="Morrison Ambience" decoding="async" class="s absolute inset-0 w-full h-full object-cover object-[center_60%]">
-    <div class="absolute inset-0 z-[3] bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+    <!-- Πιο ελαφρύ gradient για να αναδεικνύεται η φωτογραφία -->
+    <div class="absolute inset-0 z-[3] bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
   </div>
   <div class="hf absolute inset-3 md:inset-6 border border-white/25 z-10 pointer-events-none"></div>
 
@@ -373,7 +369,7 @@ const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
 $$('.rv,.mk,.ln,.lv').forEach(el=>io.observe(el));
 
-// Hero headline: word-by-word mask reveal
+// Hero headline
 const h=$('#hl'),words=h.textContent.trim().split(' ');
 h.textContent='';
 words.forEach((t,i)=>{const a=document.createElement('span'),b=document.createElement('span');a.className='w';b.style.setProperty('--i',i);b.textContent=t;a.append(b);h.append(a,' ')});
@@ -411,10 +407,22 @@ function sc(){
 }
 addEventListener('scroll',()=>{tk||(tk=requestAnimationFrame(sc))},{passive:true});sc();
 
-// Magnetic buttons (desktop only)
+// Magnetic buttons (Optimized with requestAnimationFrame to prevent lag)
 if(!rm&&matchMedia('(hover:hover) and (pointer:fine)').matches)$$('.btn').forEach(b=>{
-  b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.12+'px,'+(e.clientY-r.top-r.height/2)*.25+'px)'});
-  b.addEventListener('pointerleave',()=>b.style.transform='');
+  let raf;
+  b.addEventListener('pointermove',e=>{
+    if(raf) return;
+    raf = requestAnimationFrame(()=>{
+      const r=b.getBoundingClientRect();
+      b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.12+'px,'+(e.clientY-r.top-r.height/2)*.25+'px)';
+      raf = null;
+    });
+  });
+  b.addEventListener('pointerleave',()=>{
+    if(raf) cancelAnimationFrame(raf);
+    b.style.transform='';
+    raf = null;
+  });
 });
 
 // Copy phone
